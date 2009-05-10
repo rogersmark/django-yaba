@@ -1,10 +1,10 @@
 from django.contrib.syndication.feeds import Feed
-from newblog.blog.models import Story
+from django_yaba.blog.models import Story
 
 class RSSFeed(Feed):
-    title = "..::newblog studios::.."
+    title = "..::django_yaba studios::.."
     description = "Recent Posts"
-#    link = "http://www.newblog.com/"
+#    link = "http://www.django_yaba.com/"
 #    item_link = link
 
     def items(self):

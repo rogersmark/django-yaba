@@ -1,7 +1,7 @@
 import datetime, markdown
 from markdown import markdown
 from django.db.models import permalink
-from newblog.blog.fields import ThumbnailImageField
+from django_yaba.blog.fields import ThumbnailImageField
 from django.contrib.auth.models import User
 from django.db import models
 

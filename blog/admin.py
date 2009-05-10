@@ -1,5 +1,6 @@
 from django.contrib import admin
-from newblog.blog.models import *
+from django_yaba.blog.forms import *
+from django_yaba.blog.models import *
 
 class PhotoInline(admin.StackedInline):
     model = Photo
@@ -21,6 +22,7 @@ class StoryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     list_filter = ('status', 'owner', 'created', 'modified')
     prepopulated_fields = {'slug': ('title',)}
+    form = ArticleAdminModelForm
 
 admin.site.register(Story, StoryAdmin)
 admin.site.register(Category, CategoryAdmin)

@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
-from newblog.blog.models import Story, Category, Links
+from django_yaba.blog.models import Story, Category, Links
 
 def category(request, slug):
     """Given a category slug, display all items in a category"""
