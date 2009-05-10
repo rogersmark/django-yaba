@@ -28,11 +28,9 @@
         <div class="hlist">
           <!-- main navigation: horizontal list -->
           <ul>
-            <li><a href="/">Home</li>
-            <li><a href="/test-story">Test Story</a></li>
-            <li><a href="#">Button 3</a></li>
-            <li><a href="#">Button 4</a></li>
-            <li><a href="#">Button 5</a></li>
+            <li><a href="/">Home</a></li>
+            {% block articles %}
+            {% endblock %}
           </ul>
         </div>
       </div>

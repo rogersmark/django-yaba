@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django_yaba.blog.models import Story, Category, Links
+from django_yaba.blog.models import *
 
 def category(request, slug):
     """Given a category slug, display all items in a category"""
@@ -25,12 +25,20 @@ def story_list(request):
     page = int(request.GET.get('page', '1'))
     posts = paginator.page(page)
     link_list = Links.objects.all()
-    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list})
+    articles = Article.objects.all()
+    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles})
 
 def story_detail(request, slug):
     posts = get_object_or_404(Story, slug=slug)
     link_list = Links.objects.all()
-    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list})
+    articles = Article.objects.all()
+    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles})
+
+def article_detail(request, slug):
+    posts = get_object_or_404(Article, slug=slug)
+    link_list = Links.objects.all()
+    articles = Article.objects.all()
+    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles})
 
 def links(request):
     """ Display Links """

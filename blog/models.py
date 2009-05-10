@@ -76,6 +76,48 @@ class Story(models.Model):
     admin_objects = models.Manager()
     objects = ViewableManager()
 
+class Article(models.Model):
+    """ Articles are a bit different from Stories. These are 'extra' content pieces. For instance items that don't belong as news, maybe like a projects page of sorts. 
+        By setting 'buttoned' to true in the admin panel, the buttons on the top nav bar will link to this page, and the text will be the title of this page
+    """
+
+    STATUS_CHOICES = (
+        (1, "Needs Edit"),
+        (2, "Needs Approval"),
+        (3, "Published"),
+        (4, "Archived"),
+    )
+
+    title = models.CharField(blank=True, max_length=50)
+    slug = models.SlugField()
+    category = models.ForeignKey(Category)
+    markdown_content = models.TextField()
+    html_content = models.TextField(editable=False)
+    owner = models.ForeignKey(User)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1)
+    buttoned = models.BooleanField()
+    created = models.DateTimeField(default=datetime.datetime.now)
+    modified = models.DateTimeField(default=datetime.datetime.now)
+
+    class Meta:
+        ordering = ['modified']
+        verbose_name_plural = "articles"
+
+    def __unicode__(self):
+        return self.title
+
+    @permalink
+    def get_absolute_url(self):
+        return ("blog-article", (), {'slug' : self.slug})
+
+    def save(self):
+        self.html_content = markdown(self.markdown_content)
+        self.modified = datetime.datetime.now()
+        super(Article, self).save()
+
+    admin_objects = models.Manager()
+    objects = ViewableManager()
+
 class Item(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()

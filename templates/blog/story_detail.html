@@ -1,5 +1,12 @@
 {% extends "blog/base.html" %}
 {% block title %}..::f4ntasmic studios::.. - {{ posts.title }}{% endblock %}
+{% block articles %}
+   {% for art in articles %}
+      {% if art.buttoned %}
+         <li><a href="{{ art.get_absolute_url }}">{{ art.title }}</a></li>
+      {% endif %}
+   {% endfor %}
+{% endblock %}
 {% block menu %}
   {% for link in link_list %}
    <p><a href="{{ link.site_link }}">{{ link.label }}</a></p>
@@ -7,7 +14,7 @@
 {% endblock %}
 {% block content %}
 <div id="story-title-{{ posts.id }}" class="span-6 first">
-  <p class="story_title">{{ posts.title }}</p><br /><br /><br />
+  <p class="story_title">{{ posts.title }}</p>
   <p class="story_cat">Category: <a href="{% url blog-category posts.category.slug %}">{{ posts.category }}</a></p>
   <br />
 </div>

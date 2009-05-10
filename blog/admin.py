@@ -24,9 +24,16 @@ class StoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     form = ArticleAdminModelForm
 
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('title', 'owner', 'status', 'created', 'modified')
+    search_fields = ('title', 'content')
+    list_filter = ('status', 'owner', 'created', 'modified')
+    prepopulated_fields = {'slug': ('title',)}
+    form = ArticleAdminModelForm
+
 admin.site.register(Story, StoryAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Photo)
 admin.site.register(Links, LinksAdmin)
-
+admin.site.register(Article, ArticleAdmin)
