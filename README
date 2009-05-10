@@ -5,3 +5,20 @@ I know, we didn't have enough blog engines built with Django right? Hell, findin
 
 Purpose:
 I tend to blog a bit (http://www.f4ntasmic.com), and have built my own blog previously using Django. I wanted something a bit more flexible though, so I decided to build it with the idea of being able to plug it anywhere with minimal configuration. I'm going to leverage YAML (http://www.yaml.de/en/) for the theme of the blog, so that you can have a fairly pretty blog out of the box within minutes. Anyways, let me know if you have any questions.
+
+Features:
+
+WYSIWG Editor - Using http://www.wymeditor.org/. Thanks to http://jannisleidel.com/2008/11/autocomplete-widget-for-django-tagging-form-fields.
+   Works
+
+Blog Posts
+   Will allow previews for authenticated users eventually. Backburner.
+
+RSS Feed
+   Sorta works now. No links to it currently.
+
+BlogRoll
+   Quite functional. One would hope right? They're flipping links.
+
+Articles:
+    The articles are items that won't show up in the traditional main news feed. Also, if you check the "Buttoned" box, then the article will have a link to it on the top main nav bar. Currently functional
