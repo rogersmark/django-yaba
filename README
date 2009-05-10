@@ -1,1 +1,7 @@
-toucha
+Title:
+django-yaba, aka, django-yet-another-blog-application
+
+I know, we didn't have enough blog engines built with Django right? Hell, finding a name for this one was a PITA thanks to all the others ones that exists. Hence, YABA it is. If anyone else already has this, and I just missed it, let me know, and I'll change the name of this one. 
+
+Purpose:
+I tend to blog a bit (http://www.f4ntasmic.com), and have built my own blog previously using Django. I wanted something a bit more flexible though, so I decided to build it with the idea of being able to plug it anywhere with minimal configuration. I'm going to leverage YAML (http://www.yaml.de/en/) for the theme of the blog, so that you can have a fairly pretty blog out of the box within minutes. Anyways, let me know if you have any questions.
