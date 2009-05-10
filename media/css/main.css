@@ -1,0 +1,36 @@
+body {
+        margin: 0px 0px;
+        padding: 0px;
+        font: 16px "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+#header {
+        font: italic 1.25em Georgia, "Times New Roman", Times, serif;
+        font-size: 3em;
+        font-weight:normal;
+        color: #FFFFFF
+        line-height: 1;
+        margin-top: 20px;
+        margin-bottom: 31px;
+        text-align: center;
+}
+
+p.story_title {
+        text-align: left;
+        font-size: 1.5em;
+        float: left;
+}
+
+p.story_cat ,p.story_cat a {
+        text-align: left;
+        font-size: small;
+}
+
+p.story_cat {
+}
+
+p.small {
+        font-size: small;
+}
+
+

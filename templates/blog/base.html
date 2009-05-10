@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{% block title %}{% endblock %}</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<!-- add your meta tags here -->
+
+<link href="/media/css/layout.css" rel="stylesheet" type="text/css" />
+<!--[if lte IE 7]>
+<link href="media/css/patch_layout.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+</head>
+<body>
+  <div class="page_margins">
+    <div class="page">
+      <div id="header">
+        <div id="topnav">
+          <!-- start: skip link navigation -->
+          <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
+          <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
+          <!-- end: skip link navigation <a href="#">Login</a> | <a href="#">Contact</a> | <a href="#">Imprint</a> -->
+        </div>
+        <h1> ..::f4ntasmic studios::.. </h1>
+      </div>
+      <div id="nav">
+        <!-- skiplink anchor: navigation -->
+        <a id="navigation" name="navigation"></a>
+        <div class="hlist">
+          <!-- main navigation: horizontal list -->
+          <ul>
+            <li><a href="/">Home</li>
+            <li><a href="/test-story">Test Story</a></li>
+            <li><a href="#">Button 3</a></li>
+            <li><a href="#">Button 4</a></li>
+            <li><a href="#">Button 5</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="main">
+        <div id="col1">
+          <div id="col1_content" class="clearfix">
+          {% block content %}
+          {% endblock %}
+          </div>
+        </div>
+        <div id="col3">
+          <div id="col3_content" class="clearfix">
+            <p><h3> Links </h3>
+            {% block menu %}
+            {% endblock %}
+            <hr></p>
+            <p><h3> Recent Tweets: </h3></p>
+            {% load tweet %}
+               {% twitter_user_timeline f4nt as twitter_entries %}
+               {% if twitter_entries %}
+                   {% for entry in twitter_entries %}
+                       <p>{{ entry.created_at|date:"d M Y H:i" }} - {{ entry.text }}</p>
+                   {% endfor %}
+               {% endif %}
+               <p><a href="http://www.twitter.com/f4nt">Follow me on Twitter</a></p>
+            <hr>
+               <script type="text/javascript" src="http://www.ubuntu.com/files/countdown/display.js"></script>
+            <hr>
+               <a href="http://www.atlassian.com/summit?kwcid=summitbadge" title="Atlassian Summit"><img width="120" height="250" alt="Atlassian Summit" src="http://www.atlassian.com/summit/images/logo_summit.png"></a>
+            <hr>
+               <a href="http://www.amazon.com/wishlist/1ZKLMO2R3LSSY/ref=wl_web"><img src="http://g-ecx.images-amazon.com/images/G/01/gifts/registries/wishlist/v2/web/wl-btn-129-b._V46776269_.gif" width="129" alt="My Amazon.com Wish List" height="42" border="0" /></a>
+            <hr>
+          </div>
+          <!-- IE Column Clearing -->
+          <div id="ie_clearing"> &#160; </div>
+        </div>
+      </div>
+      <!-- begin: #footer -->
+      <div id="footer">Layout based on <a href="http://www.yaml.de/">YAML</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

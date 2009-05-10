@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% block title %}..::f4ntasmic studios::.. - {{ posts.title }}{% endblock %}
+{% block menu %}
+  {% for link in link_list %}
+   <p><a href="{{ link.site_link }}">{{ link.label }}</a></p>
+  {% endfor %}
+{% endblock %}
+{% block content %}
+<div id="story-title-{{ posts.id }}" class="span-6 first">
+  <p class="story_title">{{ posts.title }}</p><br /><br /><br />
+  <p class="story_cat">Category: <a href="{% url blog-category posts.category.slug %}">{{ posts.category }}</a></p>
+  <br />
+</div>
+<div id="story-body-{{ posts.id }}" class="span-18 last">
+  {{ posts.html_content|safe }}
+  <p class="small">Updated {{ posts.modified }}</p>
+</div>
+{% endblock %}
