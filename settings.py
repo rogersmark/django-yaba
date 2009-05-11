@@ -80,3 +80,15 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django_yaba.blog'
 )
+
+###############################################
+# django-yaba specific settings below         #
+###############################################
+# GitHub UserName for sidebar GitHub List
+GITHUB_USERNAME = 'f4nt'
+
+# Twitter UserName for sidebar Twitter List
+TWITTER_USERNAME = 'f4nt'
+
+# Blog Name
+BLOG_NAME = '..::f4ntasmic studios::..'

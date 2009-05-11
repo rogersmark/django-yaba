@@ -1,4 +1,5 @@
 import feedparser
+from django.conf import settings
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -6,7 +7,7 @@ from django_yaba.blog.models import *
 
 def parse_github():
     """ Grab latest commits from GitHub """
-    d = feedparser.parse("http://github.com/f4nt.atom")
+    d = feedparser.parse("http://github.com/%s.atom" % settings.GITHUB_USERNAME)
     e = d.entries[:5]
     commit = ""
     for x in e:
@@ -25,7 +26,10 @@ def category(request, slug):
     page = int(request.GET.get('page', '1'))
     heading = "Category: %s" % category.label
     link_list = Links.objects.all()
-    return render_to_response("blog/story_list.html", {'posts':posts, 'link_list': link_list})
+    articles = Article.objects.all()
+    commit = parse_github()
+    sitename = settings.BLOG_NAME
+    return render_to_response("blog/story_list.html", {'posts':posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename})
 
 def search(request):
     if 'q' in request.GET:
@@ -42,19 +46,24 @@ def story_list(request):
     link_list = Links.objects.all()
     articles = Article.objects.all()
     commit = parse_github()
-    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit})
+    sitename = settings.BLOG_NAME
+    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename})
 
 def story_detail(request, slug):
     posts = get_object_or_404(Story, slug=slug)
     link_list = Links.objects.all()
     articles = Article.objects.all()
-    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles})
+    commit = parse_github()
+    sitename = settings.BLOG_NAME
+    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename})
 
 def article_detail(request, slug):
     posts = get_object_or_404(Article, slug=slug)
     link_list = Links.objects.all()
     articles = Article.objects.all()
-    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles})
+    commit = parse_github()
+    sitename = settings.BLOG_NAME
+    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename})
 
 def links(request):
     """ Display Links """

@@ -66,7 +66,7 @@ class TwitterNode(CachedContextUpdatingNode):
     cache_timeout = 1800 # 30 Minutes, maybe you want to change this
 
     def __init__(self, username, varname):
-        self.username = username
+        self.username = settings.TWITTER_USERNAME
         self.varname = varname
 
     def make_datetime(self, created_at):

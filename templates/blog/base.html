@@ -20,7 +20,7 @@
           <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
           <!-- end: skip link navigation <a href="#">Login</a> | <a href="#">Contact</a> | <a href="#">Imprint</a> -->
         </div>
-        <h1> ..::f4ntasmic studios::.. </h1>
+        <h1> {% block header %}{% endblock %} </h1>
       </div>
       <div id="nav">
         <!-- skiplink anchor: navigation -->
@@ -55,7 +55,7 @@
 <!-- Start Tweet -->
             <p><h3> Recent Tweets: </h3></p>
             {% load tweet %}
-               {% twitter_user_timeline f4nt as twitter_entries %}
+               {% twitter_user_timeline NULL as twitter_entries %}
                {% if twitter_entries %}
                    {% for entry in twitter_entries %}
                        <p>{{ entry.created_at|date:"d M Y H:i" }} - {{ entry.text }}</p>
