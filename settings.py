@@ -19,6 +19,8 @@ ROOT_BLOG_URL = 'http://testblog/'
 # Root system path
 PROJECT_DIR = os.path.dirname(__file__)
 
+ALLOWED_INCLUDE_ROOTS = ("/home/f4nt/git-repos/personal/django_yaba/templates/blog/includes",)
+
 ###############################################
 # end django-yaba specific settings           #
 ###############################################
