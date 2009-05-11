@@ -9,7 +9,7 @@
 {% endblock %}
 {% block menu %}
   {% for link in link_list %}
-   <p><a href="{{ link.site_link }}">{{ link.label }}</a></p>
+   <p><li><a href="{{ link.site_link }}">{{ link.label }}</a></li></p>
   {% endfor %}
 {% endblock %}
 {% block content %}
@@ -36,4 +36,6 @@
              <p><h3>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</h3></p>
     </div>
 {% endblock %}
-
+{% block github %}
+{{ commit|safe }}
+{% endblock %}

@@ -1,7 +1,22 @@
+import feedparser
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django_yaba.blog.models import *
+
+def parse_github():
+    """ Grab latest commits from GitHub """
+    d = feedparser.parse("http://github.com/f4nt.atom")
+    e = d.entries[:5]
+    commit = ""
+    for x in e:
+        commit += "<p>"
+        commit += '<a href="%s">' % x['link']
+        commit += x['title_detail']['value']
+        commit += "</a>\n@ %s" % x['updated']
+        commit += "</p>"
+
+    return commit
 
 def category(request, slug):
     """Given a category slug, display all items in a category"""
@@ -26,7 +41,8 @@ def story_list(request):
     posts = paginator.page(page)
     link_list = Links.objects.all()
     articles = Article.objects.all()
-    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles})
+    commit = parse_github()
+    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit})
 
 def story_detail(request, slug):
     posts = get_object_or_404(Story, slug=slug)

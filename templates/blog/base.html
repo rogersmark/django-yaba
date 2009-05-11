@@ -37,16 +37,22 @@
       <div id="main">
         <div id="col1">
           <div id="col1_content" class="clearfix">
+<!-- start main content -->
           {% block content %}
           {% endblock %}
+<!-- end main content -->
           </div>
         </div>
         <div id="col3">
           <div id="col3_content" class="clearfix">
+<!-- start sidebar -->
             <p><h3> Links </h3>
+            <ul>
             {% block menu %}
             {% endblock %}
+            </ul>
             <hr></p>
+<!-- Start Tweet -->
             <p><h3> Recent Tweets: </h3></p>
             {% load tweet %}
                {% twitter_user_timeline f4nt as twitter_entries %}
@@ -56,13 +62,23 @@
                    {% endfor %}
                {% endif %}
                <p><a href="http://www.twitter.com/f4nt">Follow me on Twitter</a></p>
+<!-- Stop Tweet -->
             <hr>
+<!-- start github -->
+            <h3> GitHub Commits </h3>
+            {% block github %}
+            {% endblock %}
+<!-- stop github -->
+            <hr>
+<!-- Start Banners -->
                <script type="text/javascript" src="http://www.ubuntu.com/files/countdown/display.js"></script>
             <hr>
                <a href="http://www.atlassian.com/summit?kwcid=summitbadge" title="Atlassian Summit"><img width="120" height="250" alt="Atlassian Summit" src="http://www.atlassian.com/summit/images/logo_summit.png"></a>
             <hr>
                <a href="http://www.amazon.com/wishlist/1ZKLMO2R3LSSY/ref=wl_web"><img src="http://g-ecx.images-amazon.com/images/G/01/gifts/registries/wishlist/v2/web/wl-btn-129-b._V46776269_.gif" width="129" alt="My Amazon.com Wish List" height="42" border="0" /></a>
+<!-- Stop Banners -->
             <hr>
+<!-- End sidebar -->
           </div>
           <!-- IE Column Clearing -->
           <div id="ie_clearing"> &#160; </div>
