@@ -1,0 +1,30 @@
+<!-- start title -->
+{% block title %}TITLE{{ sitename }} - {{ posts.title }}{% endblock %}
+<!-- end title -->
+<!-- start header -->
+{% block header %}
+{{ sitename }}
+{% endblock %}
+<!-- end header -->
+<!-- start article nav bar -->
+{% block articles %}
+   {% for art in articles %}
+      {% if art.buttoned %}
+         <li><a href="{{ art.get_absolute_url }}">{{ art.title }}</a></li>
+      {% endif %}
+   {% endfor %}
+{% endblock %}
+<!-- end article nav bar -->
+<!-- start links sidebar -->
+{% block menu %}
+  {% for link in link_list %}
+   <p><a href="{{ link.site_link }}">{{ link.label }}</a></p>
+  {% endfor %}
+{% endblock %}
+<!-- end links sidebar -->
+<!-- start github -->
+{% block github %}
+{{ commit|safe }}
+{% endblock %}
+<!-- end github -->
+
