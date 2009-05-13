@@ -47,7 +47,9 @@ def story_list(request):
     articles = Article.objects.all()
     commit = parse_github()
     sitename = settings.BLOG_NAME
-    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename})
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL})
 
 def story_detail(request, slug):
     posts = get_object_or_404(Story, slug=slug)
@@ -55,7 +57,9 @@ def story_detail(request, slug):
     articles = Article.objects.all()
     commit = parse_github()
     sitename = settings.BLOG_NAME
-    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename})
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL})
 
 def article_detail(request, slug):
     posts = get_object_or_404(Article, slug=slug)
@@ -63,7 +67,8 @@ def article_detail(request, slug):
     articles = Article.objects.all()
     commit = parse_github()
     sitename = settings.BLOG_NAME
-    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename})
+    ROOT_URL = settings.ROOT_BLOG_URL
+    return render_to_response("blog/story_detail.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL})
 
 def links(request):
     """ Display Links """
