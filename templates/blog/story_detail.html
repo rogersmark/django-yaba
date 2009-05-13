@@ -17,6 +17,20 @@
     <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="/media/images/delicious.gif" alt="Delicious!"></a>
   </p>
   <!-- stop social media -->
+  <!-- start comments -->
+  <hr>
+  {% load comments %}
+  {% get_comment_list for blog.story posts.id as comment_list %}
+  {% if comment_list %}
+   {% for comment in comment_list %}
+     <p>{{ comment }}</p>
+     <hr>
+   {% endfor %}
+   {% render_comment_form for posts.id %}
+  {% else %}
+   {% render_comment_form for posts.id %}
+  {% endif %}
+  <!-- end comments -->
 </div>
 {% endblock %}
 <!-- end main content -->
