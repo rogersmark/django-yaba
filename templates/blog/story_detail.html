@@ -23,12 +23,13 @@
   {% get_comment_list for blog.story posts.id as comment_list %}
   {% if comment_list %}
    {% for comment in comment_list %}
-     <p>{{ comment }}</p>
+     <p>{{ comment.comment }}</p>
+     <p>From <a href="{{ comment.url}}">{{ comment.name }}</a></p>
      <hr>
    {% endfor %}
-   {% render_comment_form for posts.id %}
+   {% render_comment_form for blog.story posts.id %}
   {% else %}
-   {% render_comment_form for posts.id %}
+   {% render_comment_form for blog.story posts.id %}
   {% endif %}
   <!-- end comments -->
 </div>

@@ -9,14 +9,14 @@ def parse_github():
     """ Grab latest commits from GitHub """
     d = feedparser.parse("http://github.com/%s.atom" % settings.GITHUB_USERNAME)
     e = d.entries[:5]
-    commit = ""
+    commit = "<ul>"
     for x in e:
-        commit += "<p>"
+        commit += "<p><li>"
         commit += '<a href="%s">' % x['link']
         commit += x['title_detail']['value']
         commit += "</a>\n@ %s" % x['updated']
-        commit += "</p>"
-
+        commit += "</li></p>"
+    commit += "</ul>"
     return commit
 
 def category(request, slug):
