@@ -8,17 +8,24 @@ I tend to blog a bit (http://www.f4ntasmic.com), and have built my own blog prev
 
 Features:
 
-WYSIWG Editor - Using http://www.wymeditor.org/. Thanks to http://jannisleidel.com/2008/11/autocomplete-widget-for-django-tagging-form-fields.
+WYSIWG Editor:
+   Using http://www.wymeditor.org/. Thanks to http://jannisleidel.com/2008/11/autocomplete-widget-for-django-tagging-form-fields.
    Works
 
-Blog Posts
+Blog Posts:
    Will allow previews for authenticated users eventually. Backburner.
 
-RSS Feed
+RSS Feed:
    Sorta works now. No links to it currently.
 
-BlogRoll
+BlogRoll:
    Quite functional. One would hope right? They're flipping links.
 
 Articles:
     The articles are items that won't show up in the traditional main news feed. Also, if you check the "Buttoned" box, then the article will have a link to it on the top main nav bar. Currently functional
+
+Comments:
+    Currently in place and work. Would like to add CAPTCHA though.
+
+Social Media:
+    Currently can grab your latest tweets, GitHub commits, and builds links to submit stories to Digg, Reddit, Delicious, and StumbleUpon. Github/Twitter configurable via simple settings in settings.py
