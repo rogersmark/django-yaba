@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load recaptcha %}
+
+{% block title %}{% trans "Preview your comment" %}{% endblock %}
+
+{% block content %}
+  {% load comments %}
+  <form action="{% comment_form_target %}" method="post">
+{% if form.errors %}
+<h1>Oops, please correct the error{{ form.errors|pluralize }} below</h1>
+    {% else %}
+<h1>Preview your comment</h1>
+<blockquote>{{ comment|linebreaks }}</blockquote>
+    {% endif %}
+      {% if not form.errors or form.errors.recaptcha %}{% recaptcha_html %}{% endif %}
+      {% if form.errors.recaptcha %}<div class="error">{{ form.errors.recaptcha }}</div>{% endif %}
+    {% if not form.errors or form.errors.recaptcha %}
+<div>
+        and <input type="submit" name="post" value="Post your comment" id="submit"> or make changes:
+</div>
+    {% endif %}
+    {% for field in form %}
+      {% if field.is_hidden %}
+        {{ field }}
+      {% else %}
+        <p
+          {% if field.errors %} class="error"{% endif %}
+          {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+          {% if field.errors %}{{ field.errors }}{% endif %}
+          {{ field.label_tag }} {{ field }}
+        </p>
+      {% endif %}
+    {% endfor %}
+    <p class="submit">
+    <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}" />
+    <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+    </p>
+  </form>
+{% endblock %}
