@@ -21,6 +21,10 @@ PROJECT_DIR = os.path.dirname(__file__)
 
 ALLOWED_INCLUDE_ROOTS = ("/home/f4nt/git-repos/personal/django_yaba/templates/blog/includes",)
 
+RECAPTCHA_PUBLIC_KEY = "6LctfQYAAAAAAH7kNROztNvh1O3DLqBJUFDj9Q-S"
+
+RECAPTCHA_PRIVATE_KEY = "6LctfQYAAAAAACQwyZsp7T0WsvfMwDxdQ2wT4q0v"
+
 ###############################################
 # end django-yaba specific settings           #
 ###############################################

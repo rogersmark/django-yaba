@@ -74,4 +74,3 @@ def links(request):
     """ Display Links """
     link_list = Lists.objects.all()
     return render_to_response("blog/story_list.html", {'links': links})
-

@@ -1,4 +1,6 @@
 import datetime, markdown
+from django.contrib.comments.views import comments  
+from django_yaba.blog.comments import wrapped_post_comment 
 from markdown import markdown
 from django.db.models import permalink
 from django_yaba.blog.fields import ThumbnailImageField
@@ -147,3 +149,5 @@ class Photo(models.Model):
     @permalink
     def get_absolute_url(self):
         return ('photo_detail', None, {'object_id' : self.id})
+
+comments.post_comment = wrapped_post_comment  
