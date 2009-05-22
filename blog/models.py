@@ -55,7 +55,7 @@ class Story(models.Model):
 
     title = models.CharField(blank=True, max_length=50)
     slug = models.SlugField()
-    category = models.ForeignKey(Category)
+    category = models.ManyToManyField(Category)
     markdown_content = models.TextField()
     html_content = models.TextField(editable=False)
     owner = models.ForeignKey(User)

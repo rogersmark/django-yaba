@@ -2,13 +2,15 @@
 <!-- start main content -->
 {% block content %}
 <div id="story-title-{{ posts.id }}" class="span-6 first">
-  <p class="story_title">{{ posts.title }}</p>
-  <p class="story_cat">Category: <a href="{% url blog-category posts.category.slug %}">{{ posts.category }}</a></p>
-  <br />
+  <p class="story_title"><h2>{{ posts.title }}</h2></p>
 </div>
 <div id="story-body-{{ posts.id }}" class="span-18 last">
   {{ posts.html_content|safe }}
-  <p class="small">Updated {{ posts.modified }} by {{ posts.owner }}</p>
+  <p class="small">Updated {{ posts.modified|date:"m/d/y @ h:iA T" }} by {{ posts.owner }}</p>
+  <p class="story_cat"><u>Categories</u>:
+   {% for x in posts.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
+  </p>
+  <hr>
   <!-- start social media -->
   <p>
     <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="/media/images/reddit.gif" alt="Reddit"></a>
