@@ -49,7 +49,7 @@ def story_list(request):
     sitename = settings.BLOG_NAME
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    return render_to_response("blog/story_list.html", {'posts': posts, 'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/story_list.html", {'posts': posts, 'sitename': sitename})
 
 def story_detail(request, slug):
     posts = get_object_or_404(Story, slug=slug)

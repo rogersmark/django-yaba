@@ -1,0 +1,9 @@
+            <!-- start article nav bar -->
+            {% for art in articles %}
+               {% if art.buttoned %}
+                <li><a href="{{ art.get_absolute_url }}">{{ art.title }}</a></li>
+               {% endif %}
+            {% endfor %}
+          <!-- end article nav bar -->
+          </ul>
+

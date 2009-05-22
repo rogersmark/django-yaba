@@ -1,8 +1,9 @@
+import feedparser
 from django_yaba.blog.models import *
 from django.conf import settings
 from django import template
 
-register = template.Library
+register = template.Library()
 
 def parse_github():
     """ Grab latest commits from GitHub """
@@ -18,12 +19,16 @@ def parse_github():
     commit += "</ul>"
     return commit
 
-@register.simple_tag
-def menu_system(format_string):
+def sidebar():
     link_list = Links.objects.all()
-    articles = Article.objects.all()
     commit = parse_github()
     sitename = settings.BLOG_NAME
     ROOT_URL = settings.ROOT_BLOG_URL
-    #return {'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL}
-    return {'links': link_list}
+    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL}
+
+def main_nav():
+    articles = Article.objects.all()
+    return {'articles': articles}
+
+register.inclusion_tag('sidebar.html')(sidebar)
+register.inclusion_tag('main_nav.html')(main_nav)

@@ -29,14 +29,8 @@
           <!-- main navigation: horizontal list -->
           <ul>
             <li><a href="/">Home</a></li>
-            <!-- start article nav bar -->
-            {% for art in articles %}
-               {% if art.buttoned %}
-                <li><a href="{{ art.get_absolute_url }}">{{ art.title }}</a></li>
-               {% endif %}
-            {% endfor %}
-          <!-- end article nav bar -->
-          </ul>
+            {% load navbar %}
+            {% main_nav %}
         </div>
       </div>
       <div id="main">
@@ -48,36 +42,7 @@
 <!-- end main content -->
           </div>
         </div>
-        <div id="col3">
-          <div id="col3_content" class="clearfix">
-<!-- start sidebar -->
-   <!-- start links -->
-            <p><h3> Links </h3>
-            <ul>
-            {% for link in link_list %}
-               <p><li><a href="{{ link.site_link }}">{{ link.label }}</a></li></p>
-            {% endfor %}
-            </ul>
-            <hr></p>
-   <!-- end links -->
-   <!-- Start Tweet -->
-            <p><h3> Recent Tweets: </h3></p>
-            {% load tweet %}
-            <ul>
-               {% twitter_user_timeline NULL as twitter_entries %}
-               {% if twitter_entries %}
-                   {% for entry in twitter_entries %}
-                       <p><li>{{ entry.created_at|date:"d M Y H:i" }} - {{ entry.text }}</li></p>
-                   {% endfor %}
-               {% endif %}
-            </ul>
-               <p><a href="http://www.twitter.com/f4nt">Follow me on Twitter</a></p>
-   <!-- Stop Tweet -->
-            <hr>
-   <!-- start github -->
-            <h3> GitHub Commits </h3>
-            {{ commit|safe }}
-   <!-- stop github -->
+            {% sidebar %}
             <hr>
    <!-- Start Banners -->
                <script type="text/javascript" src="http://www.ubuntu.com/files/countdown/display.js"></script>
