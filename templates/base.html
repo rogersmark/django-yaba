@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load navbar %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>{{ sitename }}</title>
+<title>{% sitename %}</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <!-- add your meta tags here -->
 
@@ -20,7 +21,7 @@
           <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
           <!-- end: skip link navigation <a href="#">Login</a> | <a href="#">Contact</a> | <a href="#">Imprint</a> -->
         </div>
-        <h1> {{ sitename }} </h1>
+        <h1> {% sitename %} </h1>
       </div>
       <div id="nav">
         <!-- skiplink anchor: navigation -->
@@ -29,7 +30,6 @@
           <!-- main navigation: horizontal list -->
           <ul>
             <li><a href="/">Home</a></li>
-            {% load navbar %}
             {% main_nav %}
         </div>
       </div>

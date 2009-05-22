@@ -19,6 +19,10 @@ def parse_github():
     commit += "</ul>"
     return commit
 
+def sitename():
+    sitename = settings.BLOG_NAME
+    return {'sitename': sitename}
+
 def sidebar():
     link_list = Links.objects.all()
     commit = parse_github()
@@ -32,3 +36,4 @@ def main_nav():
 
 register.inclusion_tag('sidebar.html')(sidebar)
 register.inclusion_tag('main_nav.html')(main_nav)
+register.inclusion_tag('sitename.html')(sitename)
