@@ -25,4 +25,5 @@ def menu_system(format_string):
     commit = parse_github()
     sitename = settings.BLOG_NAME
     ROOT_URL = settings.ROOT_BLOG_URL
-    return {'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL}
+    #return {'link_list': link_list, 'articles': articles, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL}
+    return {'links': link_list}
