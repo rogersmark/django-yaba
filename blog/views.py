@@ -1,5 +1,7 @@
 import feedparser
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -48,3 +50,19 @@ def links(request):
     link_list = Lists.objects.all()
     return render_to_response("blog/story_list.html", {'links': links})
 
+def story_id(request, story_id):
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    try:
+        posts = get_object_or_404(Story, pk=story_id)
+        title = posts.slug
+        return HttpResponseRedirect("/%s/" % title)
+    except ObjectDoesNotExist:
+        pass
+
+    try:
+        posts = get_object_or_404(Article, pk=story_id)
+        title = posts.slug
+        return HttpResponseRedirect("/%s/" % title)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect("/")
