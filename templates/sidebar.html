@@ -1,6 +1,14 @@
         <div id="col3">
           <div id="col3_content" class="clearfix">
 <!-- start sidebar -->
+   <!-- start categories -->
+            <p><h3> Categories </h3>
+            <ul>
+              {% for cat in categories %}
+              <p><li><a href="{{ cat.get_absolute_url }}">{{ cat }}</a></li></p>
+              {% endfor %}
+            </ul>
+            <hr>
    <!-- start links -->
             <p><h3> Links </h3>
             <ul>

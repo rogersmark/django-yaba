@@ -24,6 +24,10 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.label
+  
+    @permalink
+    def get_absolute_url(self):
+        return ("blog-category", (), {'slug' : self.slug})
 
 class Links(models.Model):
     """ A model for links to other sites """

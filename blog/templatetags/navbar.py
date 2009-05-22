@@ -24,11 +24,11 @@ def sitename():
     return {'sitename': sitename}
 
 def sidebar():
+    categories = Category.objects.all()
     link_list = Links.objects.all()
     commit = parse_github()
     sitename = settings.BLOG_NAME
-    ROOT_URL = settings.ROOT_BLOG_URL
-    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'ROOT_URL': ROOT_URL}
+    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'categories': categories}
 
 def main_nav():
     articles = Article.objects.all()
