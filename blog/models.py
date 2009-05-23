@@ -74,11 +74,6 @@ class Story(models.Model):
     def get_absolute_url(self):
         return ("blog-story", (), {'slug' : self.slug})
 
-    def save(self):
-        self.html_content = markdown(self.markdown_content)
-        self.modified = datetime.datetime.now()
-        super(Story, self).save()
-
     admin_objects = models.Manager()
     objects = ViewableManager()
 
@@ -115,11 +110,6 @@ class Article(models.Model):
     @permalink
     def get_absolute_url(self):
         return ("blog-article", (), {'slug' : self.slug})
-
-    def save(self):
-        self.html_content = markdown(self.markdown_content)
-        self.modified = datetime.datetime.now()
-        super(Article, self).save()
 
     admin_objects = models.Manager()
     objects = ViewableManager()
