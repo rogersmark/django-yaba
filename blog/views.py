@@ -43,7 +43,7 @@ def article_detail(request, slug):
     posts = get_object_or_404(Article, slug=slug)
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    return render_to_response("blog/story_detail.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/article_detail.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
 
 def links(request):
     """ Display Links """
