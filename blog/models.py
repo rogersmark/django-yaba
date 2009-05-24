@@ -57,11 +57,12 @@ class Story(models.Model):
     title = models.CharField(blank=True, max_length=50)
     slug = models.SlugField()
     category = models.ManyToManyField(Category)
-    markdown_content = models.TextField()
+    body = models.TextField()
     owner = models.ForeignKey(User)
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     created = models.DateTimeField(default=datetime.datetime.now)
     modified = models.DateTimeField(default=datetime.datetime.now)
+    tweet_this = models.BooleanField()
 
     class Meta:
         ordering = ['-modified']
@@ -92,12 +93,13 @@ class Article(models.Model):
     title = models.CharField(blank=True, max_length=50)
     slug = models.SlugField()
     category = models.ManyToManyField(Category)
-    markdown_content = models.TextField()
+    body = models.TextField()
     owner = models.ForeignKey(User)
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     buttoned = models.BooleanField()
     created = models.DateTimeField(default=datetime.datetime.now)
     modified = models.DateTimeField(default=datetime.datetime.now)
+    tweet_this = models.BooleanField()
 
     class Meta:
         ordering = ['modified']
@@ -159,14 +161,15 @@ def content_tiny_url(content):
 
 def post_tweet(sender, instance, created, **kwargs):
     if created:
-        try:
-            url = content_tiny_url("%s/%s" % settings.ROOT_BLOG_URL, instance.get_absolute_url())
-            api = twitter.Api(username = settings.TWITTER_USER, password = settings.TWITTER_PASSWORD)
-            api.PostUpdate("New blog post - %s" % url)
-        except:
-            pass
+        if instance.tweet_this:
+            try:
+                url = content_tiny_url("%s/%s" % settings.ROOT_BLOG_URL, instance.get_absolute_url())
+                api = twitter.Api(username = settings.TWITTER_USER, password = settings.TWITTER_PASSWORD)
+                api.PostUpdate("New blog post - %s" % url)
+            except:
+                pass
 
 comments.post_comment = wrapped_post_comment
 
-#post_save_connect(post_tweet, sender=Article)
-#post_save_connect(post_tweet, sender=Story)
+post_save_connect(post_tweet, sender=Article)
+post_save_connect(post_tweet, sender=Story)
