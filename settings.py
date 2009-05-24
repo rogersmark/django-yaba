@@ -4,11 +4,12 @@ import os
 ###############################################
 # django-yaba specific settings below         #
 ###############################################
-# GitHub UserName for sidebar GitHub List
+# GitHub UserName for sidebar GitHub List - Leave blank if you don't want to use it
 GITHUB_USERNAME = 'f4nt'
 
-# Twitter UserName for sidebar Twitter List
+# Twitter UserName for sidebar Twitter List and Automatic Tweets
 TWITTER_USERNAME = 'f4nt'
+TWITTER_PASSWORD = "getyourownplzk?"
 
 # Blog Name
 BLOG_NAME = '..::f4ntasmic studios::..'
@@ -19,15 +20,9 @@ ROOT_BLOG_URL = 'http://testblog/'
 # Root system path
 PROJECT_DIR = os.path.dirname(__file__)
 
-ALLOWED_INCLUDE_ROOTS = ("/home/f4nt/git-repos/personal/django_yaba/templates/blog/includes",)
-
+# Recaptcha keys
 RECAPTCHA_PUBLIC_KEY = "6LctfQYAAAAAAH7kNROztNvh1O3DLqBJUFDj9Q-S"
-
 RECAPTCHA_PRIVATE_KEY = "6LctfQYAAAAAACQwyZsp7T0WsvfMwDxdQ2wT4q0v"
-
-TWITTER_USERNAME = "f4nt"
-
-TWITTER_PASSWORD = "getyourownplzk?"
 
 ###############################################
 # end django-yaba specific settings           #

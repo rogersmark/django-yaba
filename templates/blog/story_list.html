@@ -10,7 +10,7 @@
         <hr>
        </div>
        <div id="story-body-{{ post.id }}" class="span-18">
-         {{ post.markdown_content|safe }}
+         {{ post.body|safe }}
          <p class="small">Updated {{ post.modified|date:"m/d/y @ h:iA T" }} by {{post.owner}}</p>
          <p class="story_cat"><u>Categories</u>: 
          {% for x in post.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}

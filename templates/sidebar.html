@@ -33,8 +33,9 @@
    <!-- Stop Tweet -->
             <hr>
    <!-- start github -->
+            {% if commit %}
             <h3> GitHub Commits </h3>
             {{ commit|safe }}
-   <!-- stop github -->
             <hr>
-
+            {% endif %}
+   <!-- stop github -->
