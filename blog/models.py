@@ -171,5 +171,5 @@ def post_tweet(sender, instance, created, **kwargs):
 
 comments.post_comment = wrapped_post_comment
 
-post_save_connect(post_tweet, sender=Article)
-post_save_connect(post_tweet, sender=Story)
+post_save.connect(post_tweet, sender=Article)
+post_save.connect(post_tweet, sender=Story)
