@@ -25,6 +25,10 @@ RECAPTCHA_PUBLIC_KEY = "6LctfQYAAAAAAH7kNROztNvh1O3DLqBJUFDj9Q-S"
 
 RECAPTCHA_PRIVATE_KEY = "6LctfQYAAAAAACQwyZsp7T0WsvfMwDxdQ2wT4q0v"
 
+TWITTER_USERNAME = "f4nt"
+
+TWITTER_PASSWORD = "getyourownplzk?"
+
 ###############################################
 # end django-yaba specific settings           #
 ###############################################

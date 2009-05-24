@@ -1,4 +1,5 @@
 import datetime, markdown
+from django.db.models.signals import post_save
 from django.contrib.comments.views import comments
 from django_yaba.blog.comments import wrapped_post_comment
 from markdown import markdown
@@ -142,4 +143,30 @@ class Photo(models.Model):
     def get_absolute_url(self):
         return ('photo_detail', None, {'object_id' : self.id})
 
+def tiny_url(url):
+    apiurl = "http://tinyurl.com/api-create.php?url="
+    tinyurl = urllib.urlopen(apiurl + url).read()
+    return tinyurl
+
+def content_tiny_url(content):
+
+    regex_url = r'http:\/\/([\w.]+\/?)\S*'
+    for match in re.finditer(regex_url, content):
+        url = match.group(0)
+        content = content.replace(url,tiny_url(url))
+
+    return content
+
+def post_tweet(sender, instance, created, **kwargs):
+    if created:
+        try:
+            url = content_tiny_url("%s/%s" % settings.ROOT_BLOG_URL, instance.get_absolute_url())
+            api = twitter.Api(username = settings.TWITTER_USER, password = settings.TWITTER_PASSWORD)
+            api.PostUpdate("New blog post - %s" % url)
+        except:
+            pass
+
 comments.post_comment = wrapped_post_comment
+
+#post_save_connect(post_tweet, sender=Article)
+#post_save_connect(post_tweet, sender=Story)
