@@ -6,7 +6,7 @@ from django import template
 register = template.Library()
 
 def parse_github():
-    if settings.GITHUB_USERNAME
+    if settings.GITHUB_USERNAME:
         """ Grab latest commits from GitHub """
         d = feedparser.parse("http://github.com/%s.atom" % settings.GITHUB_USERNAME)
         e = d.entries[:5]

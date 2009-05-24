@@ -29,8 +29,10 @@
      <p>From <a href="{{ comment.url}}">{{ comment.name }}</a></p>
      <hr>
    {% endfor %}
+   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
    {% render_comment_form for blog.story posts.id %}
   {% else %}
+   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
    {% render_comment_form for blog.story posts.id %}
   {% endif %}
   <!-- end comments -->
