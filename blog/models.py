@@ -1,4 +1,7 @@
 import datetime, markdown
+import urllib,re
+import twitter
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.contrib.comments.views import comments
 from django_yaba.blog.comments import wrapped_post_comment
@@ -164,7 +167,7 @@ def post_tweet(sender, instance, created, **kwargs):
         if instance.tweet_this:
             try:
                 url = content_tiny_url("%s/%s" % settings.ROOT_BLOG_URL, instance.get_absolute_url())
-                api = twitter.Api(username = settings.TWITTER_USER, password = settings.TWITTER_PASSWORD)
+                api = twitter.Api(username = settings.TWITTER_USERNAME, password = settings.TWITTER_PASSWORD)
                 api.PostUpdate("New blog post - %s" % url)
             except:
                 pass
