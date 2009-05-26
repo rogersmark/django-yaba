@@ -166,9 +166,10 @@ def post_tweet(sender, instance, created, **kwargs):
     if created:
         if instance.tweet_this:
             try:
-                url = content_tiny_url("%s/%s" % settings.ROOT_BLOG_URL, instance.get_absolute_url())
-                api = twitter.Api(username = settings.TWITTER_USERNAME, password = settings.TWITTER_PASSWORD)
-                api.PostUpdate("New blog post - %s" % url)
+                if settings.TWITTER_USERNAME and settings.TWITTER_PASSWORD:
+                    url = content_tiny_url("%s/%s" % settings.ROOT_BLOG_URL, instance.get_absolute_url())
+                    api = twitter.Api(username = settings.TWITTER_USERNAME, password = settings.TWITTER_PASSWORD)
+                    api.PostUpdate("New blog post - %s" % url)
             except:
                 pass
 

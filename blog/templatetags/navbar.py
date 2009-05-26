@@ -32,7 +32,12 @@ def sidebar():
     link_list = Links.objects.all()
     commit = parse_github()
     sitename = settings.BLOG_NAME
-    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'categories': categories}
+    if settings.TWITTER_USERNAME or settings.TWITTER_PASSWORD:
+        tweet = True
+    else:
+        tweet = False
+
+    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'categories': categories, 'tweet_it': tweet, 'tweet_user': settings.TWITTER_USERNAME}
 
 def main_nav():
     articles = Article.objects.all()
