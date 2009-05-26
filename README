@@ -1,6 +1,9 @@
 Title:
 django_yaba, aka, django-yet-another-blog-application
 
+Demonstration:
+You can see the blog in action at http://www.f4ntasmic.com. That version is a bit customized to my exact needs, but it's basically what you'll get when you use this applicaiton.
+
 I know, we didn't have enough blog engines built with Django right? Hell, finding a name for this one was a PITA thanks to all the others ones that exists. Hence, YABA it is. If anyone else already has this, and I just missed it, let me know, and I'll change the name of this one. 
 
 Purpose:
@@ -29,3 +32,6 @@ Comments:
 
 Social Media:
     Currently can grab your latest tweets, GitHub commits, and builds links to submit stories to Digg, Reddit, Delicious, and StumbleUpon. Github/Twitter configurable via simple settings in settings.py. If you don't want to display your tweets or github commits, just leave those fields empty in settings.py. If those are blank, you'll never see them again. 
+
+Search:
+    You can now search for stories based on title/body contents. It's not super advanced, but it's functional.

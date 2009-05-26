@@ -12,8 +12,11 @@ def parse_github():
         e = d.entries[:5]
         commit = "<ul>"
         for x in e:
+            link = x['link']
+            link = link.lstrip("http://github.com/")
+            link = "http://github.com/%s" % link
             commit += "<p><li>"
-            commit += '<a href="%s">' % x['link']
+            commit += '<a href="%s">' % link
             commit += x['title_detail']['value']
             commit += "</a>\n@ %s" % x['updated']
             commit += "</li></p>"
