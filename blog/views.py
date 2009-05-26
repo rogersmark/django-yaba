@@ -66,3 +66,16 @@ def story_id(request, story_id):
         return HttpResponseRedirect("/%s/" % title)
     except ObjectDoesNotExist:
         return HttpResponseRedirect("/")
+
+def search(request):
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    if 'q' in request.GET:
+        term = request.GET['q']
+        post_list = Paginator(Story.objects.filter(Q(title__icontains=term) | Q(body__icontains=term)), 5)
+        page = int(request.GET.get('page', '1'))
+        posts = post_list.page(page)
+        return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+
+    else:
+       return HttpResponseRedirect('/')

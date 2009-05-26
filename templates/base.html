@@ -19,6 +19,10 @@
           <!-- start: skip link navigation -->
           <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
           <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
+          <form action="{% url blog-search %}" method="get">
+              <label for="q">Search:</label>
+              <input type="text" size="13" name="q" />
+          </form>
           <!-- end: skip link navigation <a href="#">Login</a> | <a href="#">Contact</a> | <a href="#">Imprint</a> -->
         </div>
         <h1> {% sitename %} </h1>
