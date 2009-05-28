@@ -6,10 +6,16 @@
 </div>
 <div id="story-body-{{ posts.id }}" class="span-18 last">
   {{ posts.body|safe }}
+  <hr>
   <p class="small">Updated {{ posts.modified|date:"m/d/y @ h:iA T" }} by {{ posts.owner }}</p>
   <p class="story_cat"><u>Categories</u>:
    {% for x in posts.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
   </p>
+  <!-- start tags -->
+  <p><u>Tags</u>: {% for tag in posts.get_tags %}
+   {{ tag }}
+  {% endfor %}</p>
+  <!-- end tags -->
   <hr>
   <!-- start social media -->
   <p>
@@ -19,7 +25,6 @@
     <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="/media/images/delicious.gif" alt="Delicious!"></a>
   </p>
   <!-- stop social media -->
-  <!-- start comments -->
   <hr>
   {% load comments %}
   {% get_comment_list for blog.story posts.id as comment_list %}

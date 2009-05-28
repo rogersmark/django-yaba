@@ -1,6 +1,8 @@
 import datetime, markdown
 import urllib,re
 import twitter
+from tagging.fields import TagField
+from tagging.models import Tag
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.contrib.comments.views import comments
@@ -66,6 +68,13 @@ class Story(models.Model):
     created = models.DateTimeField(default=datetime.datetime.now)
     modified = models.DateTimeField(default=datetime.datetime.now)
     tweet_this = models.BooleanField()
+    tags = TagField()
+
+    def set_tags(self, tags):
+        Tag.objects.update_tags(self, tags)
+
+    def get_tags(self):
+        return Tag.objects.get_for_object(self) 
 
     class Meta:
         ordering = ['-modified']
@@ -103,6 +112,13 @@ class Article(models.Model):
     created = models.DateTimeField(default=datetime.datetime.now)
     modified = models.DateTimeField(default=datetime.datetime.now)
     tweet_this = models.BooleanField()
+    tags = TagField()
+
+    def set_tags(self, tags):
+        Tag.objects.update_tags(self, tags)
+
+    def get_tags(self, tags):
+        return Tag.objects.get_for_object(self)
 
     class Meta:
         ordering = ['modified']
