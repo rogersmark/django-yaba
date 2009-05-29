@@ -79,3 +79,11 @@ def search(request):
 
     else:
        return HttpResponseRedirect('/')
+
+def tag_list(request, tag):
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    post_list = Paginator(Story.objects.filter(tags__icontains=tag), 5)
+    page = int(request.GET.get('page', '1'))
+    posts = post_list.page(page)
+    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})

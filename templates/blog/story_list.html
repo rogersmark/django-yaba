@@ -11,10 +11,16 @@
        </div>
        <div id="story-body-{{ post.id }}" class="span-18">
          {{ post.body|safe }}
+         <hr>
          <p class="small">Updated {{ post.modified|date:"m/d/y @ h:iA T" }} by {{post.owner}}</p>
          <p class="story_cat"><u>Categories</u>: 
          {% for x in post.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
          </p>
+         <!-- start tags -->
+         <p><u>Tags</u>: {% for tag in post.get_tags %}
+         <a href="/tags/{{ tag }}">{{ tag }}</a>
+         {% endfor %}</p>
+         <!-- end tags -->
          <hr>
          <!-- start social media -->
          <p>
