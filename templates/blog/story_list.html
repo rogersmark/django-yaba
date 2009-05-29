@@ -18,7 +18,7 @@
          </p>
          <!-- start tags -->
          <p><u>Tags</u>: {% for tag in post.get_tags %}
-         {{ tag }}
+         <a href="/tags/{{ tag }}">{{ tag }}</a>
          {% endfor %}</p>
          <!-- end tags -->
          <hr>
