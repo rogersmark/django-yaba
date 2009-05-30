@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 <!-- start main content -->
 {% block content %}
+{% if posts %}
 <div id="story-title-{{ posts.id }}" class="span-6 first">
   <p class="story_title"><h2>{{ posts.title }}</h2></p>
 </div>
@@ -40,6 +41,9 @@
    <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
    {% render_comment_form for blog.story posts.id %}
   {% endif %}
+{% else %}
+<p> Sorry this page doesn't seem to exist </p>
+{% endif %}
   <!-- end comments -->
 </div>
 {% endblock %}

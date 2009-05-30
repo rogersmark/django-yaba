@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 <!-- start main content -->
 {% block content %}
+{% if posts %}
 <div id="story-title-{{ posts.id }}" class="span-6 first">
   <p class="story_title"><h2>{{ posts.title }}</h2></p>
 </div>
@@ -42,6 +43,9 @@
    {% render_comment_form for blog.article posts.id %}
   {% endif %}
   <!-- end comments -->
+{% else %}
+<p> Sorry, nothing seems to exist here. Please try one of the many other links instead</p>
+{% endif %}
 </div>
 {% endblock %}
 <!-- end main content -->

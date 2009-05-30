@@ -1,11 +1,12 @@
 import feedparser
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django_yaba.blog.models import *
+from django_yaba.blog.models import Story, Article, Category, Links
 
 def category(request, slug):
     """Given a category slug, display all items in a category"""
@@ -47,7 +48,7 @@ def article_detail(request, slug):
 
 def links(request):
     """ Display Links """
-    link_list = Lists.objects.all()
+    link_list = Links.objects.all()
     return render_to_response("blog/story_list.html", {'links': links})
 
 def story_id(request, story_id):
