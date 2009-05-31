@@ -35,3 +35,52 @@ Social Media:
 
 Search:
     You can now search for stories based on title/body contents. It's not super advanced, but it's functional.
+
+Installation Instruction:
+    Long term plans include having a fully scripted install (for Linux based hosts only). Currently it requires a wee bit more work though. 
+
+    1. Grab the current HEAD from GitHub
+    2. Unpack it to a directory. For example I use the following:
+           /var/www/domains/f4ntasmic.com/www/django_yaba
+
+       You'll also want to either copy, or rsync the admin media to django_yaba/adminmedia.
+ 
+    3. Then you need to edit the following in settings.py in order for this to work properly:
+           GITHUB_USERNAME - can be left blank, and that'll remove that feed from the sidebar
+           TWITTER_USERNAME - can also be blank as above
+           TWITTER_PASSWORD - if you want to enable auto-tweeting blog/article posts
+           ROOT_BLOG_URL - Needed for certain items to work properly, mine is "http://www.f4ntasmic.com/"
+           RECAPTCHA_PUBLIC_KEY
+           RECAPTCHA_PRIVATE KEY - Both RECAPTCHA variables are required for comments to work since they leverage ReCaptcha for CAPTCHA
+
+           You'll also need to fill out your database information as necessary.
+
+    4. If you don't already have it, you'll need to install django-tagging's latest public release (yaba is not based on the SVN head or anything crazy). The tagging system for posts relies on that.
+    5. Now onto the virtual host with Apache. You have two choices, mod_python (not recommended at all) or mod_wsgi. If you're using CentOS and worried about building WSGI from source, don't fret. There's an RPM in EPEL (google EPEL, you'll find the promised land). It takes 2 seconds to install, promise. So here are your options:
+
+           mod_wsgi:
+                You'll need to add something similar to the following to your vhost:
+                          Alias /media /home/f4nt/git-repos/personal/django_yaba/media
+                          Alias /adminmedia /home/f4nt/git-repos/personal/django_yaba/adminmedia
+                          WSGIScriptAlias / /home/f4nt/git-repos/personal/django_yaba/yaba.wsgi
+
+               It's up to you to some degree on working out the directory statements to make those Aliases for media/adminmedia valid.
+
+          mod_python:
+               Now for the ugly:
+
+                   <Location "/"
+                       SetHandler python-program
+                       PythonPath "['/var/www/domains/f4ntasmic.com/www/']+sys.path"
+                       PythonHandler django.core.handlers.modpython
+                       SetEnv DJANGO_SETTINGS_MODULE django_yaba.settings
+                       SetEnv PYTHON_EGG_CACHE '/var/www/domains/f4ntasmic.com/www/django_yaba/cache/'
+                       PythonDebug On
+                   </Location>
+
+                   <LocationMatch "/(images|media|adminmedia|downloads)">
+                       SetHandler none
+                   </LocationMatch>
+
+                
+         You will want to ensure that whatever is running Apache has access to django_yaba/cache no matter which way you roll it. 
