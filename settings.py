@@ -28,7 +28,7 @@ RECAPTCHA_PRIVATE_KEY = "6LctfQYAAAAAACQwyZsp7T0WsvfMwDxdQ2wT4q0v"
 # end django-yaba specific settings           #
 ###############################################
 
-DEBUG = False
+DEBUG = True 
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
