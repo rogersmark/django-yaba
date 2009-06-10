@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django_yaba.blog.models import Story, Article, Category, Links
+from django_yaba.blog.models import Story, Article, Category, Links, Photo, Gallery
 
 def category(request, slug):
     """Given a category slug, display all items in a category"""
@@ -79,3 +79,15 @@ def tag_list(request, tag):
     page = int(request.GET.get('page', '1'))
     posts = post_list.page(page)
     return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+
+def gallery(request, slug):
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    gallery = get_object_or_404(Gallery, slug=slug)
+    return render_to_response("blog/gallery.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL})
+
+def photo_detail(request, id):
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    photo = get_object_or_404(Photo, id=id)
+    return render_to_response("blog/photo.html", {'photo': photo, 'ROOT_URL': ROOT_URL})

@@ -7,3 +7,9 @@ class ArticleAdminModelForm(forms.ModelForm):
 
     class Meta:
         model = get_model('django_yaba', 'story')
+
+class GalleryAdminModelForm(forms.ModelForm):
+    body = forms.CharField(widget=WYMEditor())
+
+    class Meta:
+        model = get_model('django_yaba', 'gallery')

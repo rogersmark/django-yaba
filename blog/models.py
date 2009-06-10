@@ -131,6 +131,32 @@ class Article(models.Model):
     admin_objects = models.Manager()
     objects = ViewableManager()
 
+class Gallery(models.Model):
+    name = models.CharField(max_length=250)
+    slug = models.SlugField()
+    created = models.DateTimeField(default=datetime.datetime.now)
+    body = models.TextField()
+    owner = models.ForeignKey(User)
+    category = models.ManyToManyField(Category)
+    tags = TagField()
+
+    def set_tags(self, tags):
+        Tag.objects.update_tags(self, tags)
+
+    def get_tags(self):
+        return Tag.objects.get_for_object(self)
+
+    class Meta:
+        ordering = ["created"]
+        verbose_name_plural = "galleries"
+
+    def __unicode__(self):
+        return self.name
+
+    @permalink
+    def get_absolute_url(self):
+        return ("blog-gallery", (), {'slug': self.slug})
+
 class Item(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()
@@ -146,9 +172,9 @@ class Item(models.Model):
         return ('item_detail', None, {'object_id' : self.id})
 
 class Photo(models.Model):
-    item = models.ForeignKey(Item)
+    gallery = models.ForeignKey(Gallery)
     title = models.CharField(max_length=100)
-    image = ThumbnailImageField(upload_to='photos')
+    image = ThumbnailImageField(upload_to='gallery/photos')
     caption = models.CharField(max_length=250, blank=True)
 
     class Meta:

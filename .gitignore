@@ -1,2 +1,4 @@
 *.pyc
 adminmedia
+gallery/photos
+gallery/

@@ -8,6 +8,11 @@ class PhotoInline(admin.StackedInline):
 class ItemAdmin(admin.ModelAdmin):
     inlines = [PhotoInline]
 
+class GalleryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+    inlines = [PhotoInline]
+    form = GalleryAdminModelForm
+
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('label',)}
 
@@ -37,3 +42,4 @@ admin.site.register(Item, ItemAdmin)
 admin.site.register(Photo)
 admin.site.register(Links, LinksAdmin)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Gallery, GalleryAdmin)
