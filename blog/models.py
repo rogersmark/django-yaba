@@ -1,13 +1,10 @@
-import datetime, markdown
-import urllib,re
-import twitter
+import datetime, urllib, re, twitter
 from tagging.fields import TagField
 from tagging.models import Tag
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.contrib.comments.views import comments
 from django_yaba.blog.comments import wrapped_post_comment
-from markdown import markdown
 from django.db.models import permalink
 from django_yaba.blog.fields import ThumbnailImageField
 from django.contrib.auth.models import User

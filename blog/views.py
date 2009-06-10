@@ -1,5 +1,3 @@
-import feedparser
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
@@ -17,14 +15,6 @@ def category(request, slug):
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
     return render_to_response("blog/story_list.html", {'posts':posts, 'ROOT_URL': ROOT_URL})
-
-def search(request):
-    if 'q' in request.GET:
-        term = request.GET['q']
-        posts = Story.objects.filter(Q(title__contains=term))
-        heading = "Search results"
-
-    return render_to_response("blog/story_list.html", {'posts': posts})
 
 def story_list(request):
     paginator = Paginator(Story.objects.all().order_by('-created'), 5)

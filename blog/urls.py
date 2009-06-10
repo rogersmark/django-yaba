@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib.syndication.views import feed
-from django_yaba.blog.models import Story, Links
+from django_yaba.blog.models import Links
 from django_yaba.blog.feeds import RSSFeed
 
 #info_dict = { 'queryset': Story.objects.all(), 'template_object_name': 'story' }
