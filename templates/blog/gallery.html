@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+<!-- start main content -->
+{% block content %}
+{% if gallery %}
+<div id="story-name-{{ gallery.id }}" class="span-6 first">
+  <p class="story_name"><h2>{{ gallery.name }}</h2></p>
+  <hr>
+</div>
+<div id="story-body-{{ gallery.id }}" class="span-18 last">
+  {{ gallery.body|safe }}
+  <hr>
+     {% for photo in gallery.photo_set.all %}
+       <a href="/{{ photo.image }}"><img src="{{ photo.image.thumb_url }}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       {% if forloop.last %}
+        </p>
+       {% endif %}
+     {% endfor %}
+  <hr>
+  <p class="small">Created {{ gallery.created|date:"m/d/y @ h:iA T" }} by {{ gallery.owner }}</p>
+  <p class="story_cat"><u>Categories</u>:
+   {% for x in gallery.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
+  </p>
+  <!-- start tags -->
+  <p><u>Tags</u>: {% for tag in gallery.get_tags %}
+   <a href="/tags/{{ tag }}">{{ tag }}</a>
+  {% endfor %}</p>
+  <!-- end tags -->
+  <hr>
+  <!-- start social media -->
+  <p>
+    <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ gallery.get_absolute_url }}&name={{ gallery.name }}"><img src="/media/images/reddit.gif" alt="Reddit"></a>
+    <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ gallery.get_absolute_url }}"><img src="/media/images/digg.gif" alt="Digg it!"></a>
+    <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ gallery.get_absolute_url }}&name={{ gallery.name }}"><img src="/media/images/stumble-upon.jpg" alt="StumbleUpon"></a>
+    <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ gallery.get_absolute_url }}&name={{ gallery.name }}"><img src="/media/images/delicious.gif" alt="Delicious!"></a>
+  </p>
+  <!-- stop social media -->
+  <hr>
+  {% load comments %}
+  {% get_comment_list for blog.gallery gallery.id as comment_list %}
+  {% if comment_list %}
+   {% for comment in comment_list %}
+     <p>{{ comment.comment }}</p>
+     <p>From <a href="{{ comment.url}}">{{ comment.name }}</a></p>
+     <hr>
+   {% endfor %}
+   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
+   {% render_comment_form for blog.gallery gallery.id %}
+  {% else %}
+   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
+   {% render_comment_form for blog.gallery gallery.id %}
+  {% endif %}
+{% else %}
+<p> Sorry this page doesn't seem to exist </p>
+{% endif %}
+  <!-- end comments -->
+</div>
+{% endblock %}
+<!-- end main content -->
+
