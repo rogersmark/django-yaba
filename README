@@ -36,6 +36,9 @@ Social Media:
 Search:
     You can now search for stories based on title/body contents. It's not super advanced, but it's functional.
 
+Galleries:
+    You can now add new photo galleries to your site. I've placed a link to the gallery list on the top nav bar for easy browsing of galleries as well. It auto creates thumbnails and links to the full size of the image as well. So far works pretty well, but isn't extensively tested at this time.
+
 Installation Instruction:
     Long term plans include having a fully scripted install (for Linux based hosts only). Currently it requires a wee bit more work though. 
 

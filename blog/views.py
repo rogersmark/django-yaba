@@ -91,3 +91,12 @@ def photo_detail(request, id):
     ROOT_URL = ROOT_URL.rstrip("/")
     photo = get_object_or_404(Photo, id=id)
     return render_to_response("blog/photo.html", {'photo': photo, 'ROOT_URL': ROOT_URL})
+
+def gallery_list(request):
+    paginator = Paginator(Gallery.objects.all().order_by('-created'), 5)
+    page = int(request.GET.get('page', '1'))
+    gallery = paginator.page(page)
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    return render_to_response("blog/gallery_list.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL})
+

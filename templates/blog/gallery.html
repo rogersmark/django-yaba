@@ -10,7 +10,7 @@
   {{ gallery.body|safe }}
   <hr>
      {% for photo in gallery.photo_set.all %}
-       <a href="/{{ photo.image }}"><img src="{{ photo.image.thumb_url }}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/media/{{ photo.image }}"><img src="{{ photo.image.thumb_url }}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
        {% if forloop.last %}
         </p>
        {% endif %}
