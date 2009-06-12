@@ -1,6 +1,13 @@
 Title:
 django_yaba, aka, django-yet-another-blog-application
 
+Dependencies:
+    Django-tagging
+    Python-Feedparser
+    Python-Twitter
+    UrlLib and UrlLib2
+    PIL 
+
 Demonstration:
 You can see the blog in action at http://www.f4ntasmic.com. That version is a bit customized to my exact needs, but it's basically what you'll get when you use this applicaiton.
 
