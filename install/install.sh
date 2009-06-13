@@ -8,6 +8,7 @@ echo "..:: Welcome to Django YaBa - by f4ntasmic Studios ::.."
 echo "A quick word of warning:"
 echo "This will setup django-yaba and put it at the root of the URL you specify later on. It does not support mounting at contexts at this time. Hence you can't put it at /blog/ at this time."
 echo "This installation script also assumes that you have the database setup already. If you don't, you'll need to go manually run syncdb after the installation is complete."
+echo "You'll also want to sign up for recaptcha keys at http://recaptcha.net, otherwise you'll have to manually enter those keys later on"
 echo "Please confirm you're ready to proceed, hit enter below, or CTRL+C to exit"
 read letsgetthisgoing
 
