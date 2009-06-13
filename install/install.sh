@@ -1,5 +1,20 @@
 #!/bin/bash
 
+####################################################
+# Introduction                                     #
+####################################################
+
+echo "..:: Welcome to Django YaBa - by f4ntasmic Studios ::.."
+echo "A quick word of warning:"
+echo "This will setup django-yaba and put it at the root of the URL you specify later on. It does not support mounting at contexts at this time. Hence you can't put it at /blog/ at this time."
+echo "This installation script also assumes that you have the database setup already. If you don't, you'll need to go manually run syncdb after the installation is complete."
+echo "Please confirm you're ready to proceed, hit enter below, or CTRL+C to exit"
+read letsgetthisgoing
+
+####################################################
+# Initial Setup                                    #
+####################################################
+
 PRESENT_WORKING=`pwd`
 OS_VERSION=`cat /etc/issue | egrep [0-9] -o | head -1`
 if [[ `uname -a | grep -o x86_64` == "x86_64" ]]; then
@@ -17,6 +32,12 @@ if [[ $EPEL_INSTALLED != "0" ]]; then
    rpm -Uvh http://download.fedora.redhat.com/pub/epel/$OS_VERSION/$ARCH/epel-release-5-3.noarch.rpm
 fi
 
+####################################################
+# Database backend setup                           #
+####################################################
+
+# TODO: Add support for other backends
+
 echo "Will you be using MySQL as a database backend? (the only option currently, this question is for future use. Waste of your time ftw"
 MYSQL="TRUE"
 
@@ -24,12 +45,20 @@ if [[ $mysql == "yes" || $mysql == "y" || $mysql == "YES" || $mysql == "Y" || $m
    MYSQL="TRUE"   
 fi
 
+####################################################
+# Installation of core pieces                      #
+####################################################
+
 echo "I will now proceed to install a selection of RPMs on your behalf. I will not force these out of kindness, so please press 'Y' to accept the downloads when yum prompts you."
 if [[ $MYSQL == "TRUE" ]]; then
    yum install Django python-setuptools python-imaging python-imaging-devel python-twitter python-feedparser cronolog mod_wsgi django-tagging python-simplejson mysql-devel
 else
    yum install Django python-setuptools python-imaging python-imaging-devel python-twitter python-feedparser cronolog mod_wsgi django-tagging python-simplejson
 fi
+
+####################################################
+# Gathering information                            #
+####################################################
 
 echo "Now we'll need to collect some information from you to determine how to setup your blog for you. Please answer the following questions, and I'll complete the setup for you!"
 echo "What is your GitHub username? (leave blank if you don't have one, and this feature will be disabled)"
@@ -66,6 +95,10 @@ if [[ $MYSQL == "TRUE" ]]; then
    read MYSQL_DB_PORT
 fi
 
+####################################################
+# PyMySQL Setup                                    #
+####################################################
+
 echo "I'll now start the install (from source) of the python MySQL module that is required"
 tar zxvf MySQL-python-1.2.2.tar.gz
 cd MySQL-python-1.2.2; python setup.py build; python setup.py install
@@ -73,7 +106,10 @@ cd ..
 
 echo "I'll now configure django_yaba"
 
-# BEGIN THE SEDATHON!
+####################################################
+# Setup settings.py                                #
+####################################################
+
 cd ..
 sed -i "s/GITHUB_USER_HOLDER/$GITHUB_USER/g" settings.py
 sed -i "s/TWITTER_USER_HOLDER/$TWITTER_USER/g" settings.py
@@ -89,23 +125,41 @@ sed -i "s/DB_PASS_HOLDER/$MYSQL_DB_PASSWORD/g" settings.py
 sed -i "s/DB_HOST_HOLDER/$MYSQL_DB_HOST/g" settings.py
 sed -i "s/DB_PORT_HOLDER/$MYSQL_DB_PORT/g" settings.py
 
-# Now to setup Apache
+####################################################
+# Apache Setup                                     #
+####################################################
+
 DJANGO_ADMIN=`locate Django | grep admin | grep media | grep lib | grep -v local | head -1 | cut -d/ --fields=1,2,3,4,5,6,7,8,9` #SO SO SO UGLY
 echo "Starting the Apache setup"
 mkdir -p /var/www/domains/$DOMAIN_NAME/$HOST_NAME/{logs,cgi-bin,ssl}
-echo "Include vhosts.d/*.conf" >> /etc/httpd/conf.d/vhosts.conf
+if [ -f /etc/httpd/conf.d/vhosts.conf ]; then
+   grep "Include" /etc/httpd/conf.d/vhosts.conf
+   if [[ $? != "0" ]]; then
+      echo "Include vhosts.d/*.conf" >> /etc/httpd/conf.d/vhosts.conf
+   fi
+else
+   echo "Include vhosts.d/*.conf" >> /etc/httpd/conf.d/vhosts.conf
+fi
 mkdir -p /etc/httpd/vhosts.d
 cd ..
-mv django-yaba django_yaba
-mv django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs
-rsync -av $DJANGO_ADMIN/ /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/adminmedia
-mkdir -p /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/cache
-chown -R apache.apache /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba
-cp /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/install/vhost_template /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
+mv django-yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba
+rsync -av $DJANGO_ADMIN/ /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/adminmedia
+mkdir -p /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/cache
+chown -R apache.apache /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba
+cp /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/install/vhost_template /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
 sed -i "s/HOST_NAME/$HOST_NAME/g" /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
 sed -i "s/DOMAIN_NAME/$DOMAIN_NAME/g" /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
 IP_ADDR=`ip addr | egrep "([0-9](.*)\.(.*)\.(.*)\.(.?)(.?)[0-9])" -o | egrep -v "(127|0.0.0.0)" | awk '{print $1}' | cut -d/ -f1`
 apachectl -t
+cd /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/
+echo "Running database sync"
+./manage syncdb
+echo
+echo "If the sync failed because you haven't setup your DB, you'll need to go set it up, and then go to /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/ and run './manage syncdb'"
+
+####################################################
+# Closing arguments                                #
+####################################################
 
 echo "Everything is now setup. You'll want to restart Apache at this time to pick up all of the changes"
 echo "You should be able to hit your site via $IP_ADDR afterwards, or via http://$HOST_NAME.$DOMAIN_NAME assuming DNS is setup. The $IP_ADDR is an educated guess though, and depending on your setup may not work."

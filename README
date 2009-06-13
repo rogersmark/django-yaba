@@ -7,6 +7,10 @@ Dependencies:
     Python-Twitter
     UrlLib and UrlLib2
     PIL 
+    PyMySQL
+    setuptools
+    cronolog
+    mod_wsgi
 
 Demonstration:
 You can see the blog in action at http://www.f4ntasmic.com. That version is a bit customized to my exact needs, but it's basically what you'll get when you use this applicaiton.
@@ -47,7 +51,14 @@ Galleries:
     You can now add new photo galleries to your site. I've placed a link to the gallery list on the top nav bar for easy browsing of galleries as well. It auto creates thumbnails and links to the full size of the image as well. So far works pretty well, but isn't extensively tested at this time.
 
 Installation Instruction:
-    Long term plans include having a fully scripted install (for Linux based hosts only). Currently it requires a wee bit more work though. 
+    After you grab the package from GitHub or f4ntasmic.com, you can find an install directory at django-yaba/install. In there is an install script that will walk through the installation for you. This currently only works on CentOS based hosts at this time. It's also only confirmed to work in CentOS 5, your milage may vary with other hosts. The manual install works with all current Linux distributions.
+
+    Scripted install:
+       cd django-yaba/install
+       ./install.sh
+       Then just follow the prompts, it'll install all dependencies for you.
+
+    Manual install, see below: 
 
     1. Grab the current HEAD from GitHub
     2. Unpack it to a directory. For example I use the following:

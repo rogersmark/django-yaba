@@ -8,7 +8,7 @@
     # DocumentRoot: The directory out of which you will serve your
     # documents. By default, all requests are taken from this directory, but
     # symbolic links and aliases may be used to point to other locations.   
-    DocumentRoot /var/www/domains/DOMAIN_NAME/HOST_NAME/htdocs                  
+    DocumentRoot /var/www/domains/DOMAIN_NAME/HOST_NAME/django_yaba                  
 
     # if not specified, the global error log is used
     # If logging to standard access and error logs comment the cronlog line and uncomment below
@@ -40,7 +40,7 @@
         Allow from all                                      
     </Directory>                                            
 
-    <Directory /var/www/domains/DOMAIN_NAME/HOST_NAME/htdocs>
+    <Directory /var/www/domains/DOMAIN_NAME/HOST_NAME/django_yaba>
         Options -Indexes ExecCGI FollowSymLinks          
         AllowOverride All                                
     </Directory>                                         
@@ -83,9 +83,9 @@
     </Location>
     # End modification
 
-     Alias /media /var/www/domains/DOMAIN_NAME/HOST_NAME/htdocs/media
-     Alias /adminmedia /var/www/domains/DOMAIN_NAME/HOST_NAME/htdocs/adminmedia
-     WSGIScriptAlias / /var/www/domains/DOMAIN_NAME/HOST_NAME/htdocs/yaba.wsgi
+     Alias /media /var/www/domains/DOMAIN_NAME/HOST_NAME/django_yaba/media
+     Alias /adminmedia /var/www/domains/DOMAIN_NAME/HOST_NAME/django_yaba/adminmedia
+     WSGIScriptAlias / /var/www/domains/DOMAIN_NAME/HOST_NAME/django_yaba/yaba.wsgi
 
 
 </VirtualHost>
