@@ -26,9 +26,9 @@ fi
 
 echo "I will now proceed to install a selection of RPMs on your behalf. I will not force these out of kindness, so please press 'Y' to accept the downloads when yum prompts you."
 if [[ $MYSQL == "TRUE" ]]; then
-   yum install python-setuptools python-imaging python-imaging-devel python-twitter python-feedparser cronolog mod_wsgi django-tagging python-simplejson mysql-devel
+   yum install Django python-setuptools python-imaging python-imaging-devel python-twitter python-feedparser cronolog mod_wsgi django-tagging python-simplejson mysql-devel
 else
-   yum install python-setuptools python-imaging python-imaging-devel python-twitter python-feedparser cronolog mod_wsgi django-tagging python-simplejson
+   yum install Django python-setuptools python-imaging python-imaging-devel python-twitter python-feedparser cronolog mod_wsgi django-tagging python-simplejson
 fi
 
 echo "Now we'll need to collect some information from you to determine how to setup your blog for you. Please answer the following questions, and I'll complete the setup for you!"
@@ -71,9 +71,6 @@ tar zxvf MySQL-python-1.2.2.tar.gz
 cd MySQL-python-1.2.2; python setup.py build; python setup.py install
 cd ..
 
-echo "I'll now actually install django itself.."
-easy_install django
-
 echo "I'll now configure django_yaba"
 
 # BEGIN THE SEDATHON!
@@ -93,16 +90,18 @@ sed -i "s/DB_HOST_HOLDER/$MYSQL_DB_HOST/g" settings.py
 sed -i "s/DB_PORT_HOLDER/$MYSQL_DB_PORT/g" settings.py
 
 # Now to setup Apache
+DJANGO_ADMIN=`locate Django | grep admin | grep media | grep lib | grep -v local | head -1 | cut -d/ --fields=1,2,3,4,5,6,7,8,9` #SO SO SO UGLY
 echo "Starting the Apache setup"
 mkdir -p /var/www/domains/$DOMAIN_NAME/$HOST_NAME/{logs,cgi-bin,ssl}
 echo "Include vhosts.d/*.conf" >> /etc/httpd/conf.d/vhosts.conf
 mkdir -p /etc/httpd/vhosts.d
 cd ..
 mv django-yaba django_yaba
-mv django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/
-ln -s /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs
-rsync -av /usr/lib/python*/site-packages/Django*/django/contrib/admin/media/ /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/adminmedia
-cp /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/install/vhost_template /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
+mv django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs
+rsync -av $DJANGO_ADMIN/ /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/adminmedia
+mkdir -p /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/cache
+chown -R apache.apache /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba
+cp /var/www/domains/$DOMAIN_NAME/$HOST_NAME/htdocs/install/vhost_template /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
 sed -i "s/HOST_NAME/$HOST_NAME/g" /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
 sed -i "s/DOMAIN_NAME/$DOMAIN_NAME/g" /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
 IP_ADDR=`ip addr | egrep "([0-9](.*)\.(.*)\.(.*)\.(.?)(.?)[0-9])" -o | egrep -v "(127|0.0.0.0)" | awk '{print $1}' | cut -d/ -f1`
@@ -110,4 +109,6 @@ apachectl -t
 
 echo "Everything is now setup. You'll want to restart Apache at this time to pick up all of the changes"
 echo "You should be able to hit your site via $IP_ADDR afterwards, or via http://$HOST_NAME.$DOMAIN_NAME assuming DNS is setup. The $IP_ADDR is an educated guess though, and depending on your setup may not work."
+echo
 echo "Please enjoy django-yaba! You can email f4nt AT f4ntasmic DOT com with any issues, follow http://twitter.com/f4nt or visit www.f4ntasmic.com for updates as well. Also there's always the GitHub repo at http://github.com/f4nt/django-yaba/tree/master"
+echo
