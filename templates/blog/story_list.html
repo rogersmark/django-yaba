@@ -11,6 +11,12 @@
        </div>
        <div id="story-body-{{ post.id }}" class="span-18">
          {{ post.body|safe }}
+          {% if post.photo_set %}
+            {% for photo in post.photo_set.all|slice:"3" %}
+             <a href="/media/{{ photo.image }}"><img src="{{ photo.image.thumb_url }}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% endfor %}
+           <p><a href="{{ post.get_absolute_url }}">Click to see the rest of the gallery</a><p>
+          {% endif %}
          <hr>
          <p class="small">Updated {{ post.modified|date:"m/d/y @ h:iA T" }} by {{post.owner}}</p>
          <p class="story_cat"><u>Categories</u>: 

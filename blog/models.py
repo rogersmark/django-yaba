@@ -23,6 +23,7 @@ class Category(models.Model):
     slug = models.SlugField()
 
     class Meta:
+        ordering = ['label']
         verbose_name_plural = "categories"
 
     def __unicode__(self):
