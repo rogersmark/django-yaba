@@ -5,7 +5,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django_yaba.blog.models import Story, Article, Category, Links, Photo, Gallery
-from django_yaba.blog.multiquery import MultiQuerySet
 
 def category(request, slug):
     """Given a category slug, display all items in a category"""
@@ -19,9 +18,7 @@ def category(request, slug):
 
 def story_list(request):
     stories = Story.objects.all().order_by('-created')
-    galleries = Gallery.objects.all().order_by('-created')
-    front_page = MultiQuerySet(stories, galleries)
-    paginator = Paginator(front_page, 5)
+    paginator = Paginator(stories, 5)
     page = int(request.GET.get('page', '1'))
     posts = paginator.page(page)
     ROOT_URL = settings.ROOT_BLOG_URL
