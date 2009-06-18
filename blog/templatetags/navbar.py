@@ -30,17 +30,25 @@ def sitename():
     sitename = settings.BLOG_NAME
     return {'sitename': sitename}
 
+def archives():
+    stories = Story.objects.all()
+    created = datetime.datetime(2000, 1, 1)
+    year_range = stories.dates('created', 'year')
+    month_range = stories.dates('created', 'month')
+    return year_range, month_range
+
 def sidebar():
     categories = Category.objects.all()
     link_list = Links.objects.all()
     commit = parse_github()
     sitename = settings.BLOG_NAME
+    year_range, month_range = archives()
     if settings.TWITTER_USERNAME or settings.TWITTER_PASSWORD:
         tweet = True
     else:
         tweet = False
 
-    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'categories': categories, 'tweet_it': tweet, 'tweet_user': settings.TWITTER_USERNAME}
+    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'categories': categories, 'tweet_it': tweet, 'tweet_user': settings.TWITTER_USERNAME, 'year_range': year_range, 'month_range': month_range}
 
 def main_nav():
     articles = Article.objects.all()

@@ -41,3 +41,18 @@
             <hr>
             {% endif %}
    <!-- stop github -->
+   <!-- start archive -->
+             {% if year_range %}
+              <p><h3> Archives </p></h3>
+              {% for year in year_range %}
+                <p><h4>{{ year.year }}</h4></p>
+                {% for month in month_range %}
+                 {% ifequal year.year month.year %}
+                  <p><a href="/archives/{{ year.year}}-{{ month.month }}">{{ month|date:"F" }}</a>
+                 {% endifequal %}
+                {% endfor %}
+              {% endfor %}
+             {% endif %}
+   <!-- stop archive -->
+               
+            

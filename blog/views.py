@@ -104,3 +104,10 @@ def gallery_list(request):
     ROOT_URL = ROOT_URL.rstrip("/")
     return render_to_response("blog/gallery_list.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL})
 
+def archives(request, date):
+    ROOT_URL = settings.ROOT_BLOG_URL
+    ROOT_URL = ROOT_URL.rstrip("/")
+    post_list = Paginator(Story.objects.filter(created__icontains=str(date)), 5)
+    page = int(request.GET.get('page', '1'))
+    posts = post_list.page(page)
+    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
