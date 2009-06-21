@@ -133,9 +133,10 @@ class Article(models.Model):
     objects = ViewableManager()
 
 class Gallery(models.Model):
-    name = models.CharField(max_length=250)
+    title = models.CharField(max_length=250)
     slug = models.SlugField()
     created = models.DateTimeField(default=datetime.datetime.now)
+    modified = models.DateTimeField(default=datetime.datetime.now)
     body = models.TextField()
     owner = models.ForeignKey(User)
     category = models.ManyToManyField(Category)
