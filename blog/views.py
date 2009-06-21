@@ -33,12 +33,6 @@ def story_list(request):
         front_page.append(x)
     
     front_page.sort(key=sort_by_date, reverse=1)
-    logging.debug("Begin: front_page contents")
-    logging.debug(front_page)
-    logging.debug("Being: forloop of front_page content dates")
-    for x in front_page:
-        logging.debug(x.created)
-    logging.debug("End logging of front_page")
     paginator = Paginator(front_page, 5)
     page = int(request.GET.get('page', '1'))
     posts = paginator.page(page)
@@ -88,7 +82,7 @@ def search(request):
         term = request.GET['q']
         post_list = Paginator(Story.objects.filter(Q(title__icontains=term) | Q(body__icontains=term)), 5)
         articles = Article.objects.filter(Q(title__icontains=term) | Q(body__icontains=term))
-        galleries = Gallery.objects.filter(Q(name__icontains=term) | Q(body__icontains=term))
+        galleries = Gallery.objects.filter(Q(title__icontains=term) | Q(body__icontains=term))
         page = int(request.GET.get('page', '1'))
         posts = post_list.page(page)
         return render_to_response("blog/story_search.html", {'posts': posts, "articles": articles, 'galleries': galleries, 'ROOT_URL': ROOT_URL})

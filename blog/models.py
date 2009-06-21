@@ -153,7 +153,7 @@ class Gallery(models.Model):
         verbose_name_plural = "galleries"
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     @permalink
     def get_absolute_url(self):

@@ -9,7 +9,7 @@ class ItemAdmin(admin.ModelAdmin):
     inlines = [PhotoInline]
 
 class GalleryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('title',)}
     inlines = [PhotoInline]
     form = GalleryAdminModelForm
 

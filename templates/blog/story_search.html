@@ -4,10 +4,9 @@
     {% if heading %}
         <h1>{{ heading }}</h1>
     {% else %}
-        <h2> Search Results: </h2>
     {% endif %}
 <!-- start blog posts results -->
-        <h3> Stories matching search results: </h3>
+        <h2> Stories matching search results: </h2>
     {% for post in posts.object_list %}
        <div id="story-title-{{ post.id }}" class="span-6">
         <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2></p>
@@ -47,7 +46,7 @@
 <!-- stop blog post results -->
     {% endfor %}
 <!-- start article post results -->
-        <h3> Articles matching search results: </h3>
+        <h2> Articles matching search results: </h2>
     {% for post in articles %}
        <div id="story-title-{{ post.id }}" class="span-6">
         <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2></p>
@@ -87,7 +86,7 @@
      {% endfor %}
 <!-- stop article search results -->
 <!-- start gallery search results -->
-        <h3> Galleries matching search results: </h3>
+        <h2> Galleries matching search results: </h2>
    {% for post in galleries %}
        <div id="story-title-{{ post.id }}" class="span-6">
         <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.name }}</a></h2></p>
@@ -138,7 +137,7 @@
         {% if posts.has_previous %}<a href="?page={{ posts.previous_page_number }}" class="util-link">previous</a>{% endif %}
         {% if posts.has_next %}<a href="?page={{ posts.next_page_number }}" class="util-link">next</a>{% endif %}
         </span>
-             <p><h3>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</h3></p>
+             <p><h2>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</h2></p>
     <!-- end pagination -->
     </div>
 {% endblock %}
