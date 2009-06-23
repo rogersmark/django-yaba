@@ -237,7 +237,7 @@ def post_tweet(sender, instance, created, **kwargs):
 def config_name(sender, instance, created, **kwargs):
     if created:
         temp = Configuration.objects.all()
-        if temp.count > 1:
+        if temp.count() > 2:
             raise Exception("There can only be one configuration entry, thus only one theme. Sorry!")     
 
 comments.post_comment = wrapped_post_comment
