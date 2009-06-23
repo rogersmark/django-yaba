@@ -11,12 +11,12 @@
  */
 
 /* import core styles | Basis-Stylesheets einbinden */
-@import url(/media/yaml/core/base.css);
+@import url(/media/themes/default/yaml/core/base.css);
 
 /* import screen layout | Screen-Layout einbinden */
-@import url(/media/yaml/navigation/nav_shinybuttons.css);
-@import url(/media/css/screen/basemod.css);
-@import url(/media/css/screen/content.css);
+@import url(/media/themes/default/yaml/navigation/nav_shinybuttons.css);
+@import url(/media/themes/default/css/screen/basemod.css);
+@import url(/media/themes/default/css/screen/content.css);
 
 /* import print layout | Druck-Layout einbinden */
-@import url(/media/yaml/print/print_draft.css);
+@import url(/media/themes/default/yaml/print/print_draft.css);

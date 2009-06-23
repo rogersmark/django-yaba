@@ -2,7 +2,7 @@ import datetime, urllib, re, twitter
 from tagging.fields import TagField
 from tagging.models import Tag
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.contrib.comments.views import comments
 from django_yaba.blog.comments import wrapped_post_comment
 from django.db.models import permalink
@@ -16,6 +16,26 @@ class ViewableManager(models.Manager):
     def get_query_set(self):
         default_queryset = super(ViewableManager, self).get_query_set()
         return default_queryset.filter(status__in=VIEWABLE_STATUS)
+
+class Theme(models.Model):
+    """ Users will currently need to upload their own themes to /media/themes/ and then add them via the admin panel """
+    title = models.CharField(max_length=50)
+    slug = models.SlugField()
+     
+    class Meta:
+        ordering = ['title']
+
+    def __unicode__(self):
+        return self.title
+
+class Configuration(models.Model):
+    """ General configuration stuff via the admin panel. Currently just handles themes """
+    title = models.CharField(max_length=50, default="Main Site")
+    slug = models.SlugField(default="main-site")
+    theme = models.ForeignKey(Theme)
+
+    def __unicode__(self):
+        return self.title
 
 class Category(models.Model):
     """ Categories for the Content that is Submitted """
@@ -214,7 +234,14 @@ def post_tweet(sender, instance, created, **kwargs):
             except:
                 pass
 
+def config_name(sender, instance, created, **kwargs):
+    if created:
+        temp = Configuration.objects.all()
+        if temp.count > 1:
+            raise Exception("There can only be one configuration entry, thus only one theme. Sorry!")     
+
 comments.post_comment = wrapped_post_comment
 
+post_save.connect(config_name, sender=Configuration)
 post_save.connect(post_tweet, sender=Article)
 post_save.connect(post_tweet, sender=Story)

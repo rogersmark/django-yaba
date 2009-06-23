@@ -8,6 +8,12 @@ class PhotoInline(admin.StackedInline):
 class ItemAdmin(admin.ModelAdmin):
     inlines = [PhotoInline]
 
+class ThemeAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+
+class ConfigurationAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+
 class GalleryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     inlines = [PhotoInline]
@@ -38,8 +44,10 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(Story, StoryAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Item, ItemAdmin)
-admin.site.register(Photo)
+#admin.site.register(Item, ItemAdmin)
+#admin.site.register(Photo)
 admin.site.register(Links, LinksAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Gallery, GalleryAdmin)
+admin.site.register(Theme, ThemeAdmin)
+admin.site.register(Configuration, ConfigurationAdmin)

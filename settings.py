@@ -5,30 +5,32 @@ import os
 # django-yaba specific settings below         #
 ###############################################
 # GitHub UserName for sidebar GitHub List - Leave blank if you don't want to use it
-GITHUB_USERNAME = 'GITHUB_USER_HOLDER'
+GITHUB_USERNAME = 'f4nt'
 
 # Twitter UserName for sidebar Twitter List and Automatic Tweets
-TWITTER_USERNAME = 'TWITTER_USER_HOLDER'
-TWITTER_PASSWORD = "TWITTER_PASS_HOLDER"
+TWITTER_USERNAME = 'f4nt'
+TWITTER_PASSWORD = "getyourownplzk?"
 
 # Blog Name
-BLOG_NAME = 'SITE_NAME_HOLDER'
+BLOG_NAME = '..::f4ntasmic studios::..'
 
 # Blog URL
-ROOT_BLOG_URL = 'http://URL_HOLDER/'
+ROOT_BLOG_URL = 'http://testblog/'
 
 # Root system path
 PROJECT_DIR = os.path.dirname(__file__)
 
 # Recaptcha keys
-RECAPTCHA_PUBLIC_KEY = "PUBLIC_KEY_HOLDER"
-RECAPTCHA_PRIVATE_KEY = "PRIVATE_KEY_HOLDER"
+RECAPTCHA_PUBLIC_KEY = "6LctfQYAAAAAAH7kNROztNvh1O3DLqBJUFDj9Q-S"
+RECAPTCHA_PRIVATE_KEY = "6LctfQYAAAAAACQwyZsp7T0WsvfMwDxdQ2wT4q0v"
+
+YABA_THEME = "default"
 
 ###############################################
 # end django-yaba specific settings           #
 ###############################################
 
-DEBUG = False 
+DEBUG = True 
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -37,12 +39,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'DB_ENGINE_HOLDER'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'DB_NAME_HOLDER'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'DB_USER_HOLDER'             # Not used with sqlite3.
-DATABASE_PASSWORD = 'DB_PASS_HOLDER'         # Not used with sqlite3.
-DATABASE_HOST = 'DB_HOST_HOLDER'             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = 'DB_PORT_HOLDER'             # Set to empty string for default. Not used with sqlite3.
+DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_NAME = os.path.join(PROJECT_DIR, 'db/blog-tagging.db')             # Or path to database file if using sqlite3.
+DATABASE_USER = ''             # Not used with sqlite3.
+DATABASE_PASSWORD = ''         # Not used with sqlite3.
+DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
+DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

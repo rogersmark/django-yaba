@@ -26,6 +26,11 @@ def parse_github():
         commit = False
         return commit
 
+def theme():
+    theme = Configuration.objects.all()[0].theme.slug
+    theme = theme.rstrip()
+    return {'theme': theme}
+
 def sitename():
     sitename = settings.BLOG_NAME
     return {'sitename': sitename}
@@ -57,3 +62,4 @@ def main_nav():
 register.inclusion_tag('sidebar.html')(sidebar)
 register.inclusion_tag('main_nav.html')(main_nav)
 register.inclusion_tag('sitename.html')(sitename)
+register.inclusion_tag('theme.html')(theme)
