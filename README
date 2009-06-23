@@ -22,6 +22,9 @@ I tend to blog a bit (http://www.f4ntasmic.com), and have built my own blog prev
 
 Features:
 
+Dynamic Themes:
+   There are two "themes" (one is just an ugly hack of the default, intended for test purposes not for actual use) now usable via the Admin UI. The default site configuration is loading from a fixture on initial syncdb, which sets up the initial themes. Obviously that means it's possible to create a theme, put it in the appropriate theme folder, and then create a theme in the Admin panel. You just have to name it the same as your directory in the themes path. Obviously, following my directory structure in the themes will lead to best results.
+
 WYSIWG Editor:
    Using http://www.wymeditor.org/. Thanks to http://jannisleidel.com/2008/11/autocomplete-widget-for-django-tagging-form-fields.
    Works
