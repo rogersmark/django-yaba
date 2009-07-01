@@ -6,7 +6,6 @@
     {% else %}
     {% endif %}
 <!-- start blog posts results -->
-        <h2> Stories matching search results: </h2>
     {% for post in posts.object_list %}
        <div id="story-title-{{ post.id }}" class="span-6">
         <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2></p>
@@ -45,92 +44,6 @@
        <hr>
 <!-- stop blog post results -->
     {% endfor %}
-<!-- start article post results -->
-        <h2> Articles matching search results: </h2>
-    {% for post in articles %}
-       <div id="story-title-{{ post.id }}" class="span-6">
-        <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2></p>
-        <hr>
-       </div>
-       <div id="story-body-{{ post.id }}" class="span-18">
-         <p class="small">Updated {{ post.modified|date:"m/d/y @ h:iA T" }} by {{post.owner}}</p>
-         <p class="story_cat"><u>Categories</u>:
-         {% for x in post.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
-         </p>
-         <!-- start tags -->
-         <p><u>Tags</u>: {% for tag in post.get_tags %}
-         <a href="/tags/{{ tag }}">{{ tag }}</a>
-         {% endfor %}</p>
-         <!-- end tags -->
-         <hr>
-         <!-- start social media -->
-         <p>
-           <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/reddit.gif" alt="Reddit"></a>
-           <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ post.get_absolute_url }}"><img src="/media/images/digg.gif" alt="Digg it!"></a>
-           <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/stumble-upon.jpg" alt="StumbleUpon"></a>
-           <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/delicious.gif" alt="Delicious!"></a>
-         </p>
-         <hr>
-         <!-- stop social media -->
-         <!-- start comments -->
-         {% load comments %}
-         {% get_comment_count for blog.story post.id as comment_count %}
-         {% if comment_count %}
-            <p><a href="{{ post.get_absolute_url }}">{{ comment_count }} comments</a></p>
-         {% else %}
-            <p><a href="{{ post.get_absolute_url }}">No comments</a></p>
-         {% endif %}
-         <!-- end comments -->
-       </div>
-       <hr>
-     {% endfor %}
-<!-- stop article search results -->
-<!-- start gallery search results -->
-        <h2> Galleries matching search results: </h2>
-   {% for post in galleries %}
-       <div id="story-title-{{ post.id }}" class="span-6">
-        <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.name }}</a></h2></p>
-        <hr>
-       </div>
-       <div id="story-body-{{ post.id }}" class="span-18">
-         {{ post.body|safe }}
-            {% for photo in post.photo_set.all|slice:"3" %}
-             <a href="/media/{{ photo.image }}"><img src="{{ photo.image.thumb_url }}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {% endfor %}
-           <p><a href="{{ post.get_absolute_url }}">Click to see the rest of the gallery</a><p>
-         <hr>
-         <p class="small">Updated {{ post.created|date:"m/d/y @ h:iA T" }} by {{post.owner}}</p>
-         <p class="story_cat"><u>Categories</u>:
-         {% for x in post.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
-         </p>
-         <!-- start tags -->
-         <p><u>Tags</u>: {% for tag in post.get_tags %}
-         <a href="/tags/{{ tag }}">{{ tag }}</a>
-         {% endfor %}</p>
-         <!-- end tags -->
-         <hr>
-         <!-- start social media -->
-         <p>
-           <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/reddit.gif" alt="Reddit"></a>
-           <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ post.get_absolute_url }}"><img src="/media/images/digg.gif" alt="Digg it!"></a>
-           <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/stumble-upon.jpg" alt="StumbleUpon"></a>
-           <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/delicious.gif" alt="Delicious!"></a>
-         </p>
-         <hr>
-         <!-- stop social media -->
-         <!-- start comments -->
-         {% load comments %}
-         {% get_comment_count for blog.gallery post.id as comment_count %}
-         {% if comment_count %}
-            <p><a href="{{ post.get_absolute_url }}">{{ comment_count }} comments</a></p>
-         {% else %}
-            <p><a href="{{ post.get_absolute_url }}">No comments</a></p>
-         {% endif %}
-         <!-- end comments -->
-       </div>
-       <hr>
-    {% endfor %}
-<!-- stop gallery search results -->
     <!-- start pagination -->
     <div class="pagination">
         <span class="step-links">
