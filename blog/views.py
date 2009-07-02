@@ -109,9 +109,18 @@ def tag_list(request, tag):
     """
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    post_list = Paginator(Story.objects.filter(tags__icontains=tag), 5)
+    stories = Story.objects.filter(tags__icontains=tag)
+    galleries = Gallery.objects.filter(tags__icontains=tag)
+    articles = Article.objects.filter(tags__icontains=tag)
+    temp = MultiQuerySet(stories, galleries, articles)
+    front_page = []
+    for x in temp:
+        front_page.append(x)
+    
+    front_page.sort(key=sort_by_date, reverse=1)
+    paginator = Paginator(front_page, 5)
     page = int(request.GET.get('page', '1'))
-    posts = post_list.page(page)
+    posts = paginator.page(page)
     return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
 
 def gallery(request, slug):
