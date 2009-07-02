@@ -79,9 +79,7 @@ def story_id(request, story_id):
         return HttpResponseRedirect("/")
 
 def search(request):
-    """ searches across galleries, articles, and blog posts 
-         TODO: Add Galleries to this
-    """
+    """ searches across galleries, articles, and blog posts  """
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
     if 'q' in request.GET:
@@ -104,9 +102,7 @@ def search(request):
        return HttpResponseRedirect('/')
 
 def tag_list(request, tag):
-    """ Accepts a tag, and finds all stories that match it. 
-         TODO: Add galleries and articles to this 
-    """
+    """ Accepts a tag, and finds all stories that match it.  """
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
     stories = Story.objects.filter(tags__icontains=tag)
@@ -147,12 +143,19 @@ def gallery_list(request):
     return render_to_response("blog/gallery_list.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL})
 
 def archives(request, date):
-    """ Accepts a date in YYYY-MM format, and returns all stories matching that.  
-          TODO: Add galleries and articles to this
-    """
+    """ Accepts a date in YYYY-MM format, and returns all stories matching that.  """
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    post_list = Paginator(Story.objects.filter(created__icontains=str(date)), 5)
+    stories = Story.objects.filter(created__icontains=str(date))
+    galleries = Gallery.objects.filter(created__icontains=str(date))
+    articles = Article.objects.filter(created__icontains=str(date))
+    temp = MultiQuerySet(stories, galleries, articles)
+    front_page = []
+    for x in temp:
+        front_page.append(x)
+    
+    front_page.sort(key=sort_by_date, reverse=1)
+    paginator = Paginator(front_page, 5)
     page = int(request.GET.get('page', '1'))
-    posts = post_list.page(page)
+    posts = paginator.page(page)
     return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
