@@ -7,11 +7,19 @@
     {% endif %}
 <!-- start blog posts results -->
     {% for post in posts.object_list %}
-       <div id="story-title-{{ post.id }}" class="span-6">
-        <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2></p>
+<div id="story-title-{{ post.id }}" class="span-6">
+        <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }} {{post.name }}</a></h2></p>
         <hr>
        </div>
        <div id="story-body-{{ post.id }}" class="span-18">
+         {{ post.body|safe }}
+          {% if post.photo_set %}
+            {% for photo in post.photo_set.all|slice:"3" %}
+             <a href="/media/{{ photo.image }}"><img src="{{ photo.image.thumb_url }}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% endfor %}
+           <p><a href="{{ post.get_absolute_url }}">Click to see the rest of the gallery</a><p>
+          {% endif %}
+         <hr>
          <p class="small">Updated {{ post.modified|date:"m/d/y @ h:iA T" }} by {{post.owner}}</p>
          <p class="story_cat"><u>Categories</u>: 
          {% for x in post.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}

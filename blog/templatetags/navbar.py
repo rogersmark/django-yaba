@@ -36,10 +36,39 @@ def sitename():
     return {'sitename': sitename}
 
 def archives():
+    """ Creating Archives navigation for the side bar. We start by grabbing all the content, which needs to be made more effecient. 
+    Then we parse out the year date times, then the month date times. """ 
     stories = Story.objects.all()
+    galleries = Gallery.objects.all()
+    articles = Article.objects.all()
     created = datetime.datetime(2000, 1, 1)
-    year_range = stories.dates('created', 'year')
-    month_range = stories.dates('created', 'month')
+    
+    year_range = []
+    for x in stories.dates('created', 'year'):
+        if x not in year_range:
+            year_range.append(x)
+    for x in galleries.dates('created', 'year'):
+        if x not in year_range:
+            year_range.append(x)
+    for x in articles.dates('created', 'year'):
+        if x not in year_range:
+            year_range.append(x)
+        
+    year_range.sort()
+    
+    month_range = []
+    for x in stories.dates('created', 'month'):
+        if x not in month_range:
+            month_range.append(x)
+    for x in galleries.dates('created', 'month'):
+        if x not in month_range:
+            month_range.append(x)
+    for x in articles.dates('created', 'month'):
+        if x not in month_range:
+            month_range.append(x)
+    
+    month_range.sort()
+    
     return year_range, month_range
 
 def sidebar():
