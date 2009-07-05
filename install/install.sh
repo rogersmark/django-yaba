@@ -146,6 +146,7 @@ cd ..
 mv django-yaba /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba
 rsync -av $DJANGO_ADMIN/ /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/adminmedia
 mkdir -p /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/cache
+mkdir -p /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/media/gallery
 chown -R apache.apache /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba
 cp /var/www/domains/$DOMAIN_NAME/$HOST_NAME/django_yaba/install/vhost_template /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
 sed -i "s/HOST_NAME/$HOST_NAME/g" /etc/httpd/vhosts.d/$HOST_NAME.$DOMAIN_NAME.conf
