@@ -17,9 +17,18 @@ def sort_by_date(x):
 def category(request, slug):
     """Given a category slug, display all items in a category"""
     category = get_object_or_404(Category, slug=slug)
-    posts = Paginator(Story.objects.filter(category=category), 10)
+    galleries = Gallery.objects.filter(category=category)
+    articles = Article.objects.filter(category=category)
+    stories = Story.objects.filter(category=category)
+    temp = MultiQuerySet(stories, galleries, articles)
+    front_page = []
+    for x in temp:
+        front_page.append(x)
+        
+    front_page.sort(key=sort_by_date, reverse=1)
+    paginator = Paginator(front_page, 10)
     page = int(request.GET.get('page', '1'))
-    heading = "Category: %s" % category.label
+    posts = paginator.page(page)
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
     return render_to_response("blog/story_list.html", {'posts':posts, 'ROOT_URL': ROOT_URL})
