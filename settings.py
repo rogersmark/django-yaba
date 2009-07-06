@@ -112,3 +112,8 @@ INSTALLED_APPS = (
     'django_yaba.blog'
 )
 
+try:
+    from localsettings import *
+except ImportError:
+    print 'localsetting could not be imported'
+    pass #Or raise

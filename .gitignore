@@ -1,4 +1,5 @@
 *.pyc
+localsettings.py
 settings.py
 adminmedia
 gallery/photos

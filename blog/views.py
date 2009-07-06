@@ -1,4 +1,6 @@
 import logging
+import datetime
+from django.views.decorators.cache import cache_page
 from django_yaba.blog.multiquery import MultiQuerySet
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -14,6 +16,7 @@ logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG,)
 def sort_by_date(x):
     return x.created
 
+@cache_page(15 * 10)
 def category(request, slug):
     """Given a category slug, display all items in a category"""
     category = get_object_or_404(Category, slug=slug)
@@ -128,6 +131,7 @@ def tag_list(request, tag):
     posts = paginator.page(page)
     return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
 
+@cache_page(15 * 60)
 def gallery(request, slug):
     """ Accepts a slug, and grabs the article that matches that """
     ROOT_URL = settings.ROOT_BLOG_URL
@@ -142,6 +146,7 @@ def photo_detail(request, id):
     photo = get_object_or_404(Photo, id=id)
     return render_to_response("blog/photo.html", {'photo': photo, 'ROOT_URL': ROOT_URL})
 
+@cache_page(15 * 30)
 def gallery_list(request):
     """ Paginates all galleries """
     paginator = Paginator(Gallery.objects.all().order_by('-created'), 5)

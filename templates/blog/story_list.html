@@ -6,7 +6,7 @@
     {% endif %}
     {% for post in posts.object_list %}
        <div id="story-title-{{ post.id }}" class="span-6">
-        <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }} {{post.name }}</a></h2></p>
+        <p class="story_title"><h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2></p>
         <hr>
        </div>
        <div id="story-body-{{ post.id }}" class="span-18">

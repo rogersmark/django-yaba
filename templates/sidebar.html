@@ -1,8 +1,10 @@
+{% load cache %}
+{% cache 1800 sidebar %}
         <div id="col3">
           <div id="col3_content" class="clearfix">
 <!-- start sidebar -->
    <!-- start categories -->
-            <p><h3> Categories </h3>
+            <p><h3> Categories</h3>
             <ul>
               {% for cat in categories %}
               <p><li><a href="{{ cat.get_absolute_url }}">{{ cat }}</a></li></p>
@@ -56,5 +58,5 @@
               {% endfor %}
              {% endif %}
    <!-- stop archive -->
-               
+   {% endcache %}            
             
