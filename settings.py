@@ -1,5 +1,5 @@
 # Django settings for django_yaba project.
-import os
+import os, socket
 
 ###############################################
 # django-yaba specific settings below         #
@@ -90,6 +90,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'django_yaba.urls'
@@ -111,6 +114,19 @@ INSTALLED_APPS = (
     'tagging',
     'django_yaba.blog'
 )
+
+# Caching Directives
+s = socket.socket()
+s.settimeout(0.25)
+try:
+    s.connect(("127.0.0.1", 11211))
+    CACHE_BACKEND = "memcached://127.0.0.1:11211/?timeout=60"
+    s.close()
+except:
+    CACHE_BACKEND = "file:///%s/cache/cache_file" % PROJECT_DIR
+    
+CACHE_MIDDLEWARE_SECONDS = 300
+CACHE_MIDDLEWARE_KEY_PREFIX = 'yaba'
 
 try:
     from localsettings import *
