@@ -11,8 +11,17 @@
        </div>
        <div id="story-body-{{ post.id }}" class="span-18">
          {{ post.body|safe }}
+             <!-- The following courtesy of http://slideshow.triptracker.net/ -->
+            <script type="text/javascript">
+            <!--
+              var viewer = new PhotoViewer();
+              {% for photo in post.photo_set.all|slice:"3" %}
+              viewer.add('/media/{{ photo.image }}');
+              {% endfor %}
+              // -->
+            </script>
             {% for photo in post.photo_set.all|slice:"3" %}
-             <a href="/media/{{ photo.image }}"><img src="{{ photo.image.thumb_url }}"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <a href="/media/{{ photo.image }}" onclick="return viewer.show(0)"> <img width="100" height="100" src="{{ photo.image.thumb_url }}" alt="" /> </a>
             {% endfor %}
            <p><a href="{{ post.get_absolute_url }}">Click to see the rest of the gallery</a><p>
          <hr>
