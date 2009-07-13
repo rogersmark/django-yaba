@@ -48,7 +48,16 @@
          <!-- stop social media -->
          <!-- start comments -->
          {% load comments %}
-         {% get_comment_count for blog.story post.id as comment_count %}
+         {% if post.photo_set %}
+            {% get_comment_count for blog.gallery post.id as comment_count %}
+          {% else %}
+             {% get_comment_count for blog.story post.id as comment_count %}
+          {% endif %}
+          {% if post.buttoned %}
+              {% get_comment_count for blog.article post.id as comment_count %}
+           {% else %}
+               {% get_comment_count for blog.story post.id as comment_count %}
+            {% endif %}
          {% if comment_count %}
             <p><a href="{{ post.get_absolute_url }}">{{ comment_count }} comments</a></p>
          {% else %}
