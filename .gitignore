@@ -6,3 +6,4 @@ gallery/photos
 gallery/
 fabfile*
 cache/cache_file*
+blog/migrations
