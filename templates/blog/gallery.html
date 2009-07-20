@@ -46,25 +46,12 @@
   </p>
   <!-- stop social media -->
   <hr>
-  {% load comments %}
-  {% get_comment_list for blog.gallery gallery.id as comment_list %}
-  {% if comment_list %}
-   {% for comment in comment_list %}
-     <p>{{ comment.comment }}</p>
-     <p>From <a href="{{ comment.url}}">{{ comment.name }}</a></p>
-     <hr>
-   {% endfor %}
-   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
-   {% render_comment_form for blog.gallery gallery.id %}
-  {% else %}
-   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
-   {% render_comment_form for blog.gallery gallery.id %}
-  {% endif %}
-{% else %}
-<p> Sorry this page doesn't seem to exist </p>
-{% endif %}
+  <!-- start comments -->
+{% load disqus_tags %}
+{% disqus_show_comments %}
   <!-- end comments -->
 </div>
+{% endif %}
 {% endblock %}
 <!-- end main content -->
 

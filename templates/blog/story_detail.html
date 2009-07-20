@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 <!-- start main content -->
 {% block content %}
-{% if posts %}
 <div id="story-title-{{ posts.id }}" class="span-6 first">
   <p class="story_title"><h2>{{ posts.title }}</h2></p>
 </div>
@@ -11,10 +10,10 @@
   <p class="small">Updated {{ posts.modified|date:"m/d/y @ h:iA T" }} by {{ posts.owner }}</p>
   <p class="story_cat"><u>Categories</u>:
    {% for x in posts.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
-  </p>
-  <!-- start tags -->
-  <p><u>Tags</u>: {% for tag in posts.get_tags %}
-   <a href="/tags/{{ tag }}">{{ tag }}</a>
+    </p>
+    <!-- start tags -->
+     <p><u>Tags</u>: {% for tag in posts.get_tags %}
+     <a href="/tags/{{ tag }}">{{ tag }}</a>
   {% endfor %}</p>
   <!-- end tags -->
   <hr>
@@ -27,23 +26,9 @@
   </p>
   <!-- stop social media -->
   <hr>
-  {% load comments %}
-  {% get_comment_list for blog.story posts.id as comment_list %}
-  {% if comment_list %}
-   {% for comment in comment_list %}
-     <p>{{ comment.comment }}</p>
-     <p>From <a href="{{ comment.url}}">{{ comment.name }}</a></p>
-     <hr>
-   {% endfor %}
-   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
-   {% render_comment_form for blog.story posts.id %}
-  {% else %}
-   <p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
-   {% render_comment_form for blog.story posts.id %}
-  {% endif %}
-{% else %}
-<p> Sorry this page doesn't seem to exist </p>
-{% endif %}
+  <!-- start comments -->
+  {% load disqus_tags %}
+{% disqus_show_comments %}
   <!-- end comments -->
 </div>
 {% endblock %}

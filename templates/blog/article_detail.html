@@ -28,20 +28,8 @@
   <!-- stop social media -->
   <!-- start comments -->
   <hr>
-  {% load comments %}
-  {% get_comment_list for blog.article posts.id as comment_list %}
-  {% if comment_list %}
-   {% for comment in comment_list %}
-     <p>{{ comment.comment }}</p>
-     <p>From <a href="{{ comment.url}}">{{ comment.name }}</a></p>
-     <hr>
-   {% endfor %}
-<p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
-   {% render_comment_form for blog.article posts.id %}
-  {% else %}
-<p>You'll be taken to a CAPTCHA input form after posting. Please don't be alarmed.</p>
-   {% render_comment_form for blog.article posts.id %}
-  {% endif %}
+{% load disqus_tags %}
+{% disqus_show_comments %}
   <!-- end comments -->
 {% else %}
 <p> Sorry, nothing seems to exist here. Please try one of the many other links instead</p>

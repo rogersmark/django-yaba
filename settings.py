@@ -24,6 +24,10 @@ PROJECT_DIR = os.path.dirname(__file__)
 RECAPTCHA_PUBLIC_KEY = "PUBLIC_KEY_HOLDER"
 RECAPTCHA_PRIVATE_KEY = "PRIVATE_KEY_HOLDER"
 
+# Disqus Settings
+DISQUS_API_KEY = "YOUR_API_KEY_HERE"
+DISQUS_WEBSITE_SHORTNAME = "YOUR_SITE_SHORTNAME_HERE"
+
 ###############################################
 # end django-yaba specific settings           #
 ###############################################
@@ -112,6 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.comments',
     'tagging',
+    'disqus',
     'django_yaba.blog'
 )
 
