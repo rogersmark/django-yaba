@@ -57,6 +57,8 @@ else
    yum install Django python-setuptools python-imaging python-imaging-devel python-twitter python-feedparser cronolog mod_wsgi django-tagging python-simplejson
 fi
 
+easy_install django-disqus
+
 ####################################################
 # Gathering information                            #
 ####################################################
