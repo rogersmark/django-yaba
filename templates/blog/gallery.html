@@ -20,7 +20,7 @@
     </script>
        {% for photo in gallery.photo_set.all %}
        
-       <a href="/media/{{ photo.image }}" onclick="return viewer.show(0)"> <img width="100" height="100" src="{{ photo.image.thumb_url }}" alt="" /> </a>
+       <a href="/media/{{ photo.image }}" onclick="return viewer.show({{ forloop.counter }})"> <img width="100" height="100" src="{{ photo.image.thumb_url }}" alt="" /> </a>
        
        {% if forloop.last %}
         </p>
