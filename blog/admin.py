@@ -4,6 +4,7 @@ from django_yaba.blog.models import *
 
 class PhotoInline(admin.StackedInline):
     model = Photo
+    extra = 10
 
 class ItemAdmin(admin.ModelAdmin):
     inlines = [PhotoInline]
