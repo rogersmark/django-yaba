@@ -20,10 +20,10 @@
   <hr>
   <!-- start social media -->
   <p>
-    <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="/media/images/reddit.gif" alt="Reddit"></a>
-    <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ posts.get_absolute_url }}"><img src="/media/images/digg.gif" alt="Digg it!"></a>
-    <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="/media/images/stumble-upon.jpg" alt="StumbleUpon"></a>
-    <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="/media/images/delicious.gif" alt="Delicious!"></a>
+    <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/reddit.gif" alt="Reddit"></a>
+    <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ posts.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/digg.gif" alt="Digg it!"></a>
+    <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/stumble-upon.jpg" alt="StumbleUpon"></a>
+    <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/delicious.gif" alt="Delicious!"></a>
   </p>
   <!-- stop social media -->
   <!-- start comments -->

@@ -20,10 +20,6 @@ ROOT_BLOG_URL = 'http://URL_HOLDER/'
 # Root system path
 PROJECT_DIR = os.path.dirname(__file__)
 
-# Recaptcha keys
-RECAPTCHA_PUBLIC_KEY = "PUBLIC_KEY_HOLDER"
-RECAPTCHA_PRIVATE_KEY = "PRIVATE_KEY_HOLDER"
-
 # Disqus Settings
 DISQUS_API_KEY = "YOUR_API_KEY_HERE"
 DISQUS_WEBSITE_SHORTNAME = "YOUR_SITE_SHORTNAME_HERE"
@@ -73,7 +69,7 @@ MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ROOT_BLOG_URL + "/media/"
+MEDIA_URL = ROOT_BLOG_URL + "media/"
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.

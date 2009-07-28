@@ -16,12 +16,12 @@
             <!--
               var viewer{{ post.id }} = new PhotoViewer();
               {% for photo in post.photo_set.all|slice:"3" %}
-              viewer{{ post.id }}.add('/media/{{ photo.image }}');
+              viewer{{ post.id }}.add('{{ MEDIA_URL }}{{ photo.image }}');
               {% endfor %}
               // -->
             </script>
             {% for photo in post.photo_set.all|slice:"3" %}
-                   <a href="/media/{{ photo.image }}" onclick="return viewer{{ post.id }}.show({{ forloop.counter0 }})"> <img width="100" height="100" src="{{ photo.image.thumb_url }}" alt="" /> </a>
+                   <a href="{{ MEDIA_URL }}{{ photo.image }}" onclick="return viewer{{ post.id }}.show({{ forloop.counter0 }})"> <img width="100" height="100" src="{{ photo.image.thumb_url }}" alt="" /> </a>
             {% endfor %}
            <p><a href="{{ post.get_absolute_url }}">Click to see the rest of the gallery</a><p>
          <hr>
@@ -37,10 +37,10 @@
          <hr>
          <!-- start social media -->
          <p>
-           <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/reddit.gif" alt="Reddit"></a>
-           <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ post.get_absolute_url }}"><img src="/media/images/digg.gif" alt="Digg it!"></a>
-           <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/stumble-upon.jpg" alt="StumbleUpon"></a>
-           <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="/media/images/delicious.gif" alt="Delicious!"></a>
+           <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="{{ MEDIA_URL }}images/reddit.gif" alt="Reddit"></a>
+           <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ post.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/digg.gif" alt="Digg it!"></a>
+           <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="{{ MEDIA_URL }}images/stumble-upon.jpg" alt="StumbleUpon"></a>
+           <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ post.get_absolute_url }}&title={{ post.title }}"><img src="{{ MEDIA_URL }}images/delicious.gif" alt="Delicious!"></a>
          </p>
          <hr>
          <!-- stop social media -->

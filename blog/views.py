@@ -9,6 +9,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django_yaba.blog.models import Story, Article, Category, Links, Photo, Gallery
+from django.template import RequestContext 
 
 LOG_FILENAME = '/tmp/yaba.out'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG,)
@@ -34,7 +35,7 @@ def category(request, slug):
     posts = paginator.page(page)
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    return render_to_response("blog/story_list.html", {'posts':posts, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/story_list.html", {'posts':posts, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 def story_list(request):
     """ Lists all stories and galleries starting with the most recent. Currently through them into a MultiQuerySet and then we sort them """
@@ -51,26 +52,26 @@ def story_list(request):
     posts = paginator.page(page)
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 def story_detail(request, slug):
     """ Takes the slug of a story, and displays that story """
     posts = get_object_or_404(Story, slug=slug)
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    return render_to_response("blog/story_detail.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/story_detail.html", {'posts': posts, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 def article_detail(request, slug):
     """ Takes the slug of an article and displays that article """
     posts = get_object_or_404(Article, slug=slug)
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    return render_to_response("blog/article_detail.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/article_detail.html", {'posts': posts, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 def links(request):
     """ Display Links - Deprecated"""
     link_list = Links.objects.all()
-    return render_to_response("blog/story_list.html", {'links': links})
+    return render_to_response("blog/story_list.html", {'links': links}, context_instance=RequestContext(request))
 
 def story_id(request, story_id):
     """ Bit of a cheap hack. Currently used to get people back to the story they commented on. Translates an ID to a slug """
@@ -108,7 +109,7 @@ def search(request):
         paginator = Paginator(front_page, 5)
         page = int(request.GET.get('page', '1'))
         posts = paginator.page(page)
-        return render_to_response("blog/story_search.html", {'posts': posts, "articles": articles, 'galleries': galleries, 'ROOT_URL': ROOT_URL})
+        return render_to_response("blog/story_search.html", {'posts': posts, "articles": articles, 'galleries': galleries, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
     else:
        return HttpResponseRedirect('/')
@@ -129,7 +130,7 @@ def tag_list(request, tag):
     paginator = Paginator(front_page, 5)
     page = int(request.GET.get('page', '1'))
     posts = paginator.page(page)
-    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 @cache_page(15 * 60)
 def gallery(request, slug):
@@ -137,14 +138,14 @@ def gallery(request, slug):
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
     gallery = get_object_or_404(Gallery, slug=slug)
-    return render_to_response("blog/gallery.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/gallery.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 def photo_detail(request, id):
     """ Deprecated """
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
     photo = get_object_or_404(Photo, id=id)
-    return render_to_response("blog/photo.html", {'photo': photo, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/photo.html", {'photo': photo, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 @cache_page(15 * 30)
 def gallery_list(request):
@@ -154,7 +155,7 @@ def gallery_list(request):
     gallery = paginator.page(page)
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")
-    return render_to_response("blog/gallery_list.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/gallery_list.html", {'gallery': gallery, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
 
 def archives(request, date):
     """ Accepts a date in YYYY-MM format, and returns all stories matching that.  """
@@ -172,4 +173,4 @@ def archives(request, date):
     paginator = Paginator(front_page, 5)
     page = int(request.GET.get('page', '1'))
     posts = paginator.page(page)
-    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL})
+    return render_to_response("blog/story_list.html", {'posts': posts, 'ROOT_URL': ROOT_URL}, context_instance=RequestContext(request))
