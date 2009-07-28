@@ -27,7 +27,7 @@ Dynamic Themes:
    There are two "themes" (one is just an ugly hack of the default, intended for test purposes not for actual use) now usable via the Admin UI. The default site configuration is loading from a fixture on initial syncdb, which sets up the initial themes. Obviously that means it's possible to create a theme, put it in the appropriate theme folder, and then create a theme in the Admin panel. You just have to name it the same as your directory in the themes path. Obviously, following my directory structure in the themes will lead to best results.
 
 WYSIWG Editor:
-   Using http://www.wymeditor.org/. Thanks to http://jannisleidel.com/2008/11/autocomplete-widget-for-django-tagging-form-fields.
+   Using TinyMCE
    Works
 
 Blog Posts:
@@ -76,8 +76,8 @@ Installation Instruction:
            TWITTER_USERNAME - can also be blank as above
            TWITTER_PASSWORD - if you want to enable auto-tweeting blog/article posts
            ROOT_BLOG_URL - Needed for certain items to work properly, mine is "http://www.f4ntasmic.com/"
-           RECAPTCHA_PUBLIC_KEY
-           RECAPTCHA_PRIVATE KEY - Both RECAPTCHA variables are required for comments to work since they leverage ReCaptcha for CAPTCHA
+           DISQUS_API_KEY - Needed for Disqus comments
+           DISQUS_WEBSITE_SHORTNAME - Needed for Disqus Comments
 
            You'll also need to fill out your database information as necessary.
 
