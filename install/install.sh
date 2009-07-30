@@ -74,10 +74,10 @@ else
    echo "What is your Twitter password? (This information is collected so you can auto-tweet new posts)"
    read TWITTER_PASS
 fi
-echo "Please enter your ReCaptcha (http://recaptcha.net/) PUBLIC key"
-read RECAPTCHA_PUBLIC
-echo "Please enter your ReCaptcha (http://recaptcha.net/) PRIVATE key"
-read RECAPTCHA_PRIVATE
+echo "Please enter your DJango Disqus key"
+read DISQUS_API_KEY
+echo "Please enter your Django Disqus Shortname"
+read DISQUS_SHORTNAME
 echo "Please enter your site's host name (i.e. 'www')"
 read HOST_NAME
 echo "Please enter your site's domain name (i.e. 'example.com')"
@@ -119,8 +119,8 @@ sed -i "s/TWITTER_USER_HOLDER/$TWITTER_USER/g" settings.py
 sed -i "s/TWITTER_PASS_HOLDER/$TWITTER_PASS/g" settings.py
 sed -i "s/SITE_NAME_HOLDER/$SITE_NAME/g" settings.py
 sed -i "s/URL_HOLDER/$HOST_NAME.$DOMAIN_NAME/g" settings.py
-sed -i "s/PUBLIC_KEY_HOLDER/$RECAPTCHA_PUBLIC/g" settings.py
-sed -i "s/PRIVATE_KEY_HOLDER/$RECAPTCHA_PRIVATE/g" settings.py
+sed -i "s/DISQUS_API_HOLDER/$DISQUS_API_KEY/g" settings.py
+sed -i "s/DISQUS_SHORT_HOLDER/$DISQUS_SHORTNAME/g" settings.py
 sed -i "s/DB_ENGINE_HOLDER/mysql/g" settings.py
 sed -i "s/DB_NAME_HOLDER/$MYSQL_DB_NAME/g" settings.py
 sed -i "s/DB_USER_HOLDER/$MYSQL_DB_USER/g" settings.py

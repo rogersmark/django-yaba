@@ -21,8 +21,8 @@ ROOT_BLOG_URL = 'http://URL_HOLDER/'
 PROJECT_DIR = os.path.dirname(__file__)
 
 # Disqus Settings
-DISQUS_API_KEY = "YOUR_API_KEY_HERE"
-DISQUS_WEBSITE_SHORTNAME = "YOUR_SITE_SHORTNAME_HERE"
+DISQUS_API_KEY = "DISQUS_API_HOLDER"
+DISQUS_WEBSITE_SHORTNAME = "DISQUS_SHORT_HOLDER"
 
 ###############################################
 # end django-yaba specific settings           #
