@@ -15,7 +15,7 @@
 
   /* (en) Marginal areas & page background */
   /* (de) Randbereiche & Seitenhintergrund */
-  body { background: #4d87c7 url("images/bg_blue.gif") repeat-x top left fixed; padding: 10px 0; }
+  body { background: #7E7E7E url("images/bg_blue.gif") repeat-x top left fixed; padding: 10px 0; }
 
   /* Layout Alignment | Layout-Ausrichtung */
   .page_margins { margin: 0 auto; }

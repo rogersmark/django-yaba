@@ -10,4 +10,7 @@ class RSSFeed(Feed):
 
     def items(self):
         return Story.objects.all().order_by('-created')[:10]
+    
+    def link(self, obj):
+        return obj.get_absolute_url()
 
