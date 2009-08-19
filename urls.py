@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls.defaults import *
 
 from django.contrib import admin
@@ -12,3 +13,10 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^', include('django_yaba.blog.urls')),
 )
+
+if settings.DEBUG is True:
+    urlpatterns += patterns('',
+        (r'^/media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': '/home/f4nt/python-dev/django-yaba/src/django_yaba/media/'}),
+    )
+
