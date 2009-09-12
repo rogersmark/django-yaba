@@ -16,6 +16,7 @@ urlpatterns = patterns('django_yaba.blog.views',
     url(r'^gallery/(?P<slug>[-\w]+)/$', 'gallery', name='blog-gallery'),
     url(r'^gallery/detail/(?P<id>[-\w]+)/$', 'photo_detail', name='photo_detail'),
     url(r'^archives/(?P<date>[-\w]+)/$', 'archives', name='blog-archives'),
+    url(r'^status/cache/$', 'cache_view', name='caching'),
 )
 
 urlpatterns += patterns('',
