@@ -8,3 +8,4 @@ fabfile*
 cache/cache_file*
 blog/migrations
 db/
+blog/fixtures
