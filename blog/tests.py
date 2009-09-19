@@ -1,8 +1,10 @@
 import unittest
 import datetime
+from django.contrib.auth.models import User
+from django_yaba.blog import models
 from django.test.client import Client
 
-class BlogTest(unittest.TestCase):
+class BlogWebTest(unittest.TestCase):
     """
     YaBa Unit Tests
     """
@@ -36,3 +38,40 @@ class BlogTest(unittest.TestCase):
 
         self.failUnless(response.items()[0][1], 200)
 
+class BlogModelTests(unittest.TestCase):
+    """
+    YaBa Unit Tests
+    """
+
+    def setUp(self):
+        self.user = User.objects.create(username='test',
+            email='test@testing.com'
+            )
+        self.user.set_password('testing')
+        self.category = models.Category.objects.create(
+            label="Test Category",
+            slug="test-category"
+            )
+        self.link = models.Links.objects.create(
+            label="Test Link",
+            slug="test-link",
+            site_link="http://www.google.com/"
+            )
+        self.story = models.Story.objects.create(
+            title="Test 1",
+            slug="test-1",
+            body="Test Blog Post",
+            owner=self.user
+            )
+        self.article = models.Article.objects.create(
+            title="Test Article",
+            slug="test-article",
+            body="Test Article Post",
+            owner=self.user,
+            buttoned=True
+            )
+
+    def test_items(self):
+        self.assertEquals(self.story.get_absolute_url(), '/test-1/')
+        self.assertEquals(self.article.get_absolute_url(), 
+            '/article/test-article/')
