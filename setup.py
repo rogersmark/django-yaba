@@ -31,8 +31,6 @@ setup(
     classifiers = [
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
-        'Operating System :: Linux',
         'Programming Language :: Python',
-        'Topic :: Blogging',
     ]
 )

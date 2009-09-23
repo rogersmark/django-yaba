@@ -11,6 +11,4 @@ Keywords: django yaba blog
 Platform: UNKNOWN
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: BSD License
-Classifier: Operating System :: Linux
 Classifier: Programming Language :: Python
-Classifier: Topic :: Blogging

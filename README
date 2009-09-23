@@ -7,10 +7,7 @@ Dependencies:
     Python-Twitter
     UrlLib and UrlLib2
     PIL 
-    PyMySQL
     setuptools
-    cronolog
-    mod_wsgi
     django-disqus
 
 Demonstration:
@@ -56,57 +53,42 @@ Galleries:
     You can now add new photo galleries to your site. I've placed a link to the gallery list on the top nav bar for easy browsing of galleries as well. It auto creates thumbnails and links to the full size of the image as well. So far works pretty well, but isn't extensively tested at this time.
 
 Installation Instruction:
-    After you grab the package from GitHub or f4ntasmic.com, you can find an install directory at django-yaba/install. In there is an install script that will walk through the installation for you. This currently only works on CentOS based hosts at this time. It's also only confirmed to work in CentOS 5, your milage may vary with other hosts. The manual install works with all current Linux distributions.
+    YaBa is now intended to be 'pluggable' so that you can easy_install it, and make use of it in your project of choice
+    as a blog. Currently it's not incredibly well tested as a pluggable, so your mileage may vary. If you do use it and
+    run into problems PLEASE let me know by submitting an issue or emailing me. I'd love to help resolve any issues you
+    run into. So right now you can just 'easy_install django-yaba' to install this package. Then you'll need to put the
+    following variables in your settings.py:
 
-    Scripted install:
-       cd django-yaba/install
-       ./install.sh
-       Then just follow the prompts, it'll install all dependencies for you.
+    ###############################################
+    # django-yaba specific settings below         #
+    ###############################################
+    # GitHub UserName for sidebar GitHub List - Leave blank if you don't want to use it
+    GITHUB_USERNAME = 'GITHUB_USER_HOLDER'
 
-    Manual install, see below: 
+    # Twitter UserName for sidebar Twitter List and Automatic Tweets
+    TWITTER_USERNAME = 'TWITTER_USER_HOLDER'
+    TWITTER_PASSWORD = "TWITTER_PASS_HOLDER"
 
-    1. Grab the current HEAD from GitHub
-    2. Unpack it to a directory. For example I use the following:
-           /var/www/domains/f4ntasmic.com/www/django_yaba
+    # Blog Name
+    BLOG_NAME = 'SITE_NAME_HOLDER'
 
-       You'll also want to either copy, or rsync the admin media to django_yaba/adminmedia.
- 
-    3. Then you need to edit the following in settings.py in order for this to work properly:
-           GITHUB_USERNAME - can be left blank, and that'll remove that feed from the sidebar
-           TWITTER_USERNAME - can also be blank as above
-           TWITTER_PASSWORD - if you want to enable auto-tweeting blog/article posts
-           ROOT_BLOG_URL - Needed for certain items to work properly, mine is "http://www.f4ntasmic.com/"
-           DISQUS_API_KEY - Needed for Disqus comments
-           DISQUS_WEBSITE_SHORTNAME - Needed for Disqus Comments
+    # Blog URL
+    ROOT_BLOG_URL = 'http://URL_HOLDER/'
 
-           You'll also need to fill out your database information as necessary.
+    # Root system path
+    PROJECT_DIR = os.path.dirname(__file__)
 
-    4. If you don't already have it, you'll need to install django-tagging's latest public release (yaba is not based on the SVN head or anything crazy). The tagging system for posts relies on that.
-    5. Now onto the virtual host with Apache. You have two choices, mod_python (not recommended at all) or mod_wsgi. If you're using CentOS and worried about building WSGI from source, don't fret. There's an RPM in EPEL (google EPEL, you'll find the promised land). It takes 2 seconds to install, promise. So here are your options:
+    # Disqus Settings
+    DISQUS_API_KEY = "DISQUS_API_HOLDER"
+    DISQUS_WEBSITE_SHORTNAME = "DISQUS_SHORT_HOLDER"
+    ################################################
 
-           mod_wsgi:
-                You'll need to add something similar to the following to your vhost:
-                          Alias /media /home/f4nt/git-repos/personal/django_yaba/media
-                          Alias /adminmedia /home/f4nt/git-repos/personal/django_yaba/adminmedia
-                          WSGIScriptAlias / /home/f4nt/git-repos/personal/django_yaba/yaba.wsgi
+    Then you'll want to add the following applications to your INSTALLED_APPS:
 
-               It's up to you to some degree on working out the directory statements to make those Aliases for media/adminmedia valid.
+    tagging
+    disqus
+    django_yaba
 
-          mod_python:
-               Now for the ugly:
-
-                   <Location "/"
-                       SetHandler python-program
-                       PythonPath "['/var/www/domains/f4ntasmic.com/www/']+sys.path"
-                       PythonHandler django.core.handlers.modpython
-                       SetEnv DJANGO_SETTINGS_MODULE django_yaba.settings
-                       SetEnv PYTHON_EGG_CACHE '/var/www/domains/f4ntasmic.com/www/django_yaba/cache/'
-                       PythonDebug On
-                   </Location>
-
-                   <LocationMatch "/(images|media|adminmedia|downloads)">
-                       SetHandler none
-                   </LocationMatch>
-
-                
-         You will want to ensure that whatever is running Apache has access to django_yaba/cache no matter which way you roll it. 
+    Now you'll sync up your database to setup all of the YaBa tables along with the applications it depends on. Finally
+    YaBa does have it's own theming that it uses, so I've included in the package all the media that I use on
+    www.f4ntasmic.com. You'll need to put that in your media path if you want to make use of it. Enjoy!
