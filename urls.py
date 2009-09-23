@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 
 if settings.DEBUG is True:
     urlpatterns += patterns('',
-        (r'^/media/(?P<path>.*)$', 'django.views.static.serve',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': '/home/f4nt/python-dev/django-yaba/src/django_yaba/media/'}),
     )
 

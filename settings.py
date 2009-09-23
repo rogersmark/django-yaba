@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'tagging',
     'disqus',
+    'test_extensions',
     'django_yaba.blog'
 )
 
