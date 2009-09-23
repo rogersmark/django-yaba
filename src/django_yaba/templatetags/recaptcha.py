@@ -1,6 +1,6 @@
 from django import template
 from django.conf import settings
-from django_yaba.blog import captcha
+from django_yaba import captcha
 
 register = template.Library()
 

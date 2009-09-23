@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django_yaba.blog.models import *
+from django_yaba.models import *
 
 class PhotoInline(admin.StackedInline):
     model = Photo

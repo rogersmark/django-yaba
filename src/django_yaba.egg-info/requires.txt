@@ -1,0 +1,10 @@
+setuptools
+python-twitter
+twitter
+simplejson
+Django
+South
+feedparser
+django_test_extensions
+django-disqus
+django-tagging

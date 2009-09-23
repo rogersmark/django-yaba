@@ -1,0 +1,3 @@
+recursive-include src/django_yaba/fixtures *.json
+recursive-include src/django_yaba/templates *.html
+recursive-include src/django_yaba/media *.html *.css *.js

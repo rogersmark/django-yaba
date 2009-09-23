@@ -1,10 +1,10 @@
 from django.conf.urls.defaults import *
 from django.contrib.syndication.views import feed
-from django_yaba.blog.models import Links
-from django_yaba.blog.feeds import RSSFeed
+from django_yaba.models import Links
+from django_yaba.feeds import RSSFeed
 
 #info_dict = { 'queryset': Story.objects.all(), 'template_object_name': 'story' }
-urlpatterns = patterns('django_yaba.blog.views',
+urlpatterns = patterns('django_yaba.views',
     url(r'^category/(?P<slug>[-\w]+)/$', 'category', name="blog-category"),
     url(r'^$', 'story_list', name="blog-home"),
     url(r'^(?P<slug>[-\w]+)/$', 'story_detail', name="blog-story"),

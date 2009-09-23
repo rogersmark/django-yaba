@@ -1,0 +1,27 @@
+[
+    {
+        "pk": 1, 
+        "model": "django_yaba.configuration", 
+        "fields": {
+            "theme": 1, 
+            "slug": "main-site", 
+            "title": "Main Site"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "django_yaba.theme", 
+        "fields": {
+            "slug": "default", 
+            "title": "Default"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "django_yaba.theme", 
+        "fields": {
+            "slug": "different", 
+            "title": "Different"
+        }
+    }
+]

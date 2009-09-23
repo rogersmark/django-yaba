@@ -1,5 +1,5 @@
 import copy
-from django_yaba.blog import captcha
+from django_yaba import captcha
 from django.conf import settings  
 from django import http  
 from django.contrib import comments  

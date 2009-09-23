@@ -2,14 +2,14 @@ import logging
 import datetime, re
 from django import http
 from django.views.decorators.cache import cache_page
-from django_yaba.blog.multiquery import MultiQuerySet
+from django_yaba.multiquery import MultiQuerySet
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django_yaba.blog.models import Story, Article, Category, Links, Photo, Gallery
+from django_yaba.models import Story, Article, Category, Links, Photo, Gallery
 from django.template import RequestContext 
 
 LOG_FILENAME = '/tmp/yaba.out'

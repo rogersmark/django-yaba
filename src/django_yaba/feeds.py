@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.syndication.feeds import Feed
-from django_yaba.blog.models import Story
+from django_yaba.models import Story
 
 class RSSFeed(Feed):
     title = settings.BLOG_NAME

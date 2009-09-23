@@ -4,9 +4,9 @@ from tagging.models import Tag
 from django.conf import settings
 from django.db.models.signals import post_save, pre_save
 from django.contrib.comments.views import comments
-from django_yaba.blog.comments import wrapped_post_comment
+from django_yaba.comments import wrapped_post_comment
 from django.db.models import permalink
-from django_yaba.blog.fields import ThumbnailImageField
+from django_yaba.fields import ThumbnailImageField
 from django.contrib.auth.models import User
 from django.db import models
 

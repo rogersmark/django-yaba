@@ -1,7 +1,7 @@
 import unittest
 import datetime
 from django.contrib.auth.models import User
-from django_yaba.blog import models
+from django_yaba import models
 from django.test.client import Client
 
 class BlogWebTest(unittest.TestCase):
