@@ -1,4 +1,3 @@
-MANIFEST.in
 README
 setup.py
 src/django_yaba/__init__.py

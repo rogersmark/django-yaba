@@ -1,5 +1,11 @@
+import os
 from setuptools import setup, find_packages
- 
+
+media_files = []
+
+for dirpath, dirnames, filenames in os.walk('src/django_yaba/media'):
+        media_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
+
 setup(
     name = "django-yaba",
     version = "0.2",
@@ -9,8 +15,13 @@ setup(
     
     packages = find_packages('src'),
     package_dir = {'':'src'},
+    data_files = media_files,
     package_data = {
-        '': ['*.html']
+        'django_yaba':
+        ['templates/admin/*.html',
+        'templates/blog/*.html',
+        'templates/comments/*.html',
+        'templates/feeds/*.html']
     },
     include_package_data=True,
     license = "BSD License",
