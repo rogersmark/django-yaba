@@ -1,3 +1,4 @@
+MANIFEST.in
 README
 setup.py
 src/django_yaba/__init__.py
@@ -277,16 +278,13 @@ src/django_yaba/media/tinymce/jscripts/tiny_mce/utils/form_utils.js
 src/django_yaba/media/tinymce/jscripts/tiny_mce/utils/mctabs.js
 src/django_yaba/media/tinymce/jscripts/tiny_mce/utils/validate.js
 src/django_yaba/templates/500.html
-src/django_yaba/templates/base.html
+src/django_yaba/templates/blog_base.html
 src/django_yaba/templates/main_nav.html
 src/django_yaba/templates/memcached_status.html
 src/django_yaba/templates/sidebar.html
 src/django_yaba/templates/sitename.html
 src/django_yaba/templates/theme.html
-src/django_yaba/templates/admin/base.html
 src/django_yaba/templates/admin/base_site.html
-src/django_yaba/templates/admin/change_form.html
-src/django_yaba/templates/admin/login.html
 src/django_yaba/templates/blog/article_detail.html
 src/django_yaba/templates/blog/gallery.html
 src/django_yaba/templates/blog/gallery_list.html

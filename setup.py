@@ -8,7 +8,7 @@ for dirpath, dirnames, filenames in os.walk('src/django_yaba/media'):
 
 setup(
     name = "django-yaba",
-    version = "0.2",
+    version = "0.2.6",
     author = "Mark Rogers",
     author_email = "f4nt@f4ntasmic.com",
     url = "http://www.f4ntasmic.com",
