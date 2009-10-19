@@ -1,20 +1,20 @@
 {% extends "admin/base.html" %}
 {% load i18n %}
-<!-- insipired by http://blog.montylounge.com/2009/jul/5/customizing-django-admin-branding/ -->
-{% block title %}{{ title }} | {% trans 'Django-YaBa Administration' %}{% endblock %}
 
-{% block extrastyle %}
-<style>
-#header{ background-color: #333940; border-bottom: solid 3px #999; }
-
-#branding h1{ color: #fff; }
-.module h2, .module caption, .inline-group h2 { background:#ccc url(/adminmedia/img/admin/nav-bg.gif) bottom left repeat-x; color: #333940; }
-a.section:link, a.section:visited { color: #666666; }
-</style>
+{% block extrahead %}
+<script type="text/javascript" src="{{ MEDIA_URL}}/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+    tinyMCE.init({
+            mode : "textareas",
+            theme : "advanced"
+    });
+    </script>
 {% endblock %}
 
+{% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
+
 {% block branding %}
-<h1 id="site-name" > {% trans 'Django-YaBa Administration' %}</h1>
+<h1 id="site-name">{% trans 'Django administration' %}</h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

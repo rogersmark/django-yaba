@@ -7,7 +7,7 @@
             <p><h3> Categories</h3>
             <ul>
               {% for cat in categories %}
-              <p><li><a href="{{ cat.get_absolute_url }}">{{ cat }}</a></li></p>
+              <p><li><a href="{{ ROOT_URL }}/{{ cat.get_absolute_url }}">{{ cat }}</a></li></p>
               {% endfor %}
             </ul>
             <hr>
@@ -51,7 +51,7 @@
                 <ul>
                 {% for month in month_range %}
                  {% ifequal year.year month.year %}
-                  <p><li><a href="/archives/{{ year.year}}-{{ month|date:"m" }}">{{ month|date:"F" }}</a></li>
+                  <p><li><a href="{{ ROOT_URL }}/archives/{{ year.year}}-{{ month|date:"m" }}">{{ month|date:"F" }}</a></li>
                  {% endifequal %}
                 {% endfor %}
                 </ul>

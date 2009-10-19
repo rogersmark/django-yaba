@@ -13,7 +13,6 @@
 <script type="text/javascript"    src="{{ MEDIA_URL }}js/slide.js"></script>
             {% load disqus_tags %}
 
-{% disqus_dev %}
 </head>
 <body>
   <div class="page_margins">
@@ -37,9 +36,9 @@
         <div class="hlist">
           <!-- main navigation: horizontal list -->
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/feeds/rss">RSS Feed</a></li>
-            <li><a href="/gallery/list">Galleries</a></li>
+            <li><a href="{{ ROOT_URL }}">Home</a></li>
+            <li><a href="{{ ROOT_URL }}/feeds/rss">RSS Feed</a></li>
+            <li><a href="{{ ROOT_URL }}/gallery/list">Galleries</a></li>
             {% main_nav %}
         </div>
       </div>
@@ -53,11 +52,6 @@
           </div>
         </div>
             {% sidebar %}
-            <hr>
-   <!-- Start Banners -->
-              <a href="http://www.gnu.org/"><img src="{{ MEDIA_URL }}images/gplv3-127x51.png" alt="GPL" \></a>
-            <hr>
-   <!-- Stop Banners -->
             <hr>
 <!-- End sidebar -->
           </div>
