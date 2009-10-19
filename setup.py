@@ -14,7 +14,7 @@ setup(
     url = "http://www.f4ntasmic.com",
     
     packages = find_packages('src'),
-    package_dir = {'':'src'},
+    package_dir = {'':'.'},
     data_files = media_files,
     package_data = {
         'django_yaba':
