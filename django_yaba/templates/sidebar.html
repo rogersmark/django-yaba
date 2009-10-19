@@ -4,7 +4,7 @@
           <div id="col3_content" class="clearfix">
 <!-- start sidebar -->
    <!-- start categories -->
-            <p><h3> Categories</h3>
+            <h3> Categories</h3>
             <ul>
               {% for cat in categories %}
               <p><li><a href="{{ ROOT_URL }}/{{ cat.get_absolute_url }}">{{ cat }}</a></li></p>
@@ -12,7 +12,7 @@
             </ul>
             <hr>
    <!-- start links -->
-            <p><h3> Links </h3>
+            <h3> Links </h3>
             <ul>
             {% for link in link_list %}
                <p><li><a href="{{ link.site_link }}">{{ link.label }}</a></li></p>
@@ -22,7 +22,7 @@
    <!-- end links -->
    <!-- Start Tweet -->
             {% if tweet_it %}
-            <p><h3> Recent Tweets: </h3></p>
+            <h3> Recent Tweets: </h3>
             {% load tweet %}
             <ul>
                {% twitter_user_timeline NULL as twitter_entries %}
@@ -45,9 +45,9 @@
    <!-- stop github -->
    <!-- start archive -->
              {% if year_range %}
-              <p><h3> Archives </p></h3>
+              <h3> Archives</h3>
               {% for year in year_range %}
-                <p><h4>{{ year.year }}</h4></p>
+                <h4>{{ year.year }}</h4>
                 <ul>
                 {% for month in month_range %}
                  {% ifequal year.year month.year %}
