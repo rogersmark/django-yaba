@@ -9,4 +9,5 @@ cache/cache_file*
 blog/migrations
 db/
 blog/fixtures
-
+django_yaba.egg-info
+dist
