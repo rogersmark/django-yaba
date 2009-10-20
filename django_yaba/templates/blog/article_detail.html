@@ -7,7 +7,7 @@
 </div>
 <div id="story-body-{{ posts.id }}" class="span-18 last">
   {{ posts.body|safe }}
-  <hr>
+  <hr />
   <p class="small">Updated {{ posts.modified|date:"m/d/y @ h:iA T" }} by {{ posts.owner }}</p>
   <p class="story_cat"><u>Categories</u>:
    {% for x in posts.category.all %}<a href="{{ x.get_absolute_url }}">{{ x }}</a> {% endfor %}
@@ -17,17 +17,17 @@
    <a href="/tags/{{ tag }}">{{ tag }}</a>
   {% endfor %}</p>
   <!-- end tags -->
-  <hr>
+  <hr />
   <!-- start social media -->
   <p>
-    <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/reddit.gif" alt="Reddit"></a>
-    <a href="http://digg.com/submit?phase=2&url={{ ROOT_URL }}{{ posts.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/digg.gif" alt="Digg it!"></a>
-    <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/stumble-upon.jpg" alt="StumbleUpon"></a>
-    <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ posts.get_absolute_url }}&title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/delicious.gif" alt="Delicious!"></a>
+    <a href="http://reddit.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}amp;title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/reddit.gif" alt="Reddit"></a>
+    <a href="http://digg.com/submit?phase=2amp;url={{ ROOT_URL }}{{ posts.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/digg.gif" alt="Digg it!"></a>
+    <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ posts.get_absolute_url }}amp;title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/stumble-upon.jpg" alt="StumbleUpon"></a>
+    <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ posts.get_absolute_url }}amp;title={{ posts.title }}"><img src="{{ MEDIA_URL }}images/delicious.gif" alt="Delicious!"></a>
   </p>
   <!-- stop social media -->
   <!-- start comments -->
-  <hr>
+  <hr />
 {% load disqus_tags %}
 {% disqus_show_comments %}
   <!-- end comments -->

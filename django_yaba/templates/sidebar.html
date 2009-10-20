@@ -10,7 +10,7 @@
               <p><li><a href="{{ ROOT_URL }}/{{ cat.get_absolute_url }}">{{ cat }}</a></li></p>
               {% endfor %}
             </ul>
-            <hr>
+            <hr />
    <!-- start links -->
             <h3> Links </h3>
             <ul>
@@ -18,7 +18,7 @@
                <p><li><a href="{{ link.site_link }}">{{ link.label }}</a></li></p>
             {% endfor %}
             </ul>
-            <hr></p>
+            <hr /></p>
    <!-- end links -->
    <!-- Start Tweet -->
             {% if tweet_it %}
@@ -33,14 +33,14 @@
                {% endif %}
             </ul>
                <p><a href="http://www.twitter.com/{{ tweet_user }}">Follow me on Twitter</a></p>
-            <hr>
+            <hr />
             {% endif %}
    <!-- Stop Tweet -->
    <!-- start github -->
             {% if commit %}
             <h3> GitHub Commits </h3>
             {{ commit|safe }}
-            <hr>
+            <hr />
             {% endif %}
    <!-- stop github -->
    <!-- start archive -->
