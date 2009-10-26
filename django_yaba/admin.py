@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 from django_yaba.models import *
 
 class PhotoInline(admin.StackedInline):
@@ -17,6 +18,7 @@ class ConfigurationAdmin(admin.ModelAdmin):
 class GalleryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     inlines = [PhotoInline]
+    form = forms.GalleryAdminForm
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('label',)}
@@ -31,12 +33,14 @@ class StoryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     list_filter = ('status', 'owner', 'created', 'modified')
     prepopulated_fields = {'slug': ('title',)}
+    form = forms.StoryAdminForm
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'owner', 'status', 'created', 'modified')
     search_fields = ('title', 'content')
     list_filter = ('status', 'owner', 'created', 'modified')
     prepopulated_fields = {'slug': ('title',)}
+    form = forms.ArticleAdminForm
 
 admin.site.register(Story, StoryAdmin)
 admin.site.register(Category, CategoryAdmin)
