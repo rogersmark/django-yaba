@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django import forms
+from django_yaba import forms
 from django_yaba.models import *
 
 class PhotoInline(admin.StackedInline):

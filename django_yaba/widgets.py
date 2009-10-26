@@ -11,18 +11,7 @@ class TinyMCEWidget(forms.Textarea):
     class Media:
         js = (
             settings.MEDIA_URL + 'js/tiny_mce/tiny_mce.js',
-            '''
-            tinyMCE.init({
-                mode : "textareas",
-                theme : "advanced",
-                editor_selector : "tinymce",
-                theme_advanced_buttons1 : "formatselect, bold, italic, strikethrough, sub, sup, charmap, bullist, numlist,
-                    indent, outdent, link, unlink, undo, redo, code",
-                theme_advanced_buttons2 : "",
-                theme_advanced_blockformats : "p, h2, h3, h4, h5, h6, blockquote",
-                theme_advanced_toolbar_location : "top"
-            });
-            ''',
+            settings.MEDIA_URL + 'js/textareas.js',
         )
 
 class SmallTextField(forms.Textarea):
