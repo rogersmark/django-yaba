@@ -18,7 +18,10 @@ class ViewableManager(models.Manager):
         return default_queryset.filter(status__in=VIEWABLE_STATUS)
 
 class Theme(models.Model):
-    """ Users will currently need to upload their own themes to /media/themes/ and then add them via the admin panel """
+    """
+    Users will currently need to upload their own themes to /media/themes/ 
+    and then add them via the admin panel
+    """
     title = models.CharField(max_length=50)
     slug = models.SlugField()
      
@@ -29,7 +32,10 @@ class Theme(models.Model):
         return self.title
 
 class Configuration(models.Model):
-    """ General configuration stuff via the admin panel. Currently just handles themes """
+    """
+    General configuration stuff via the admin panel. Currently just handles 
+    themes
+    """
     title = models.CharField(max_length=50, default="Main Site")
     slug = models.SlugField(default="main-site")
     theme = models.ForeignKey(Theme)
@@ -38,7 +44,9 @@ class Configuration(models.Model):
         return self.title
 
 class Category(models.Model):
-    """ Categories for the Content that is Submitted """
+    """
+    Categories for the Content that is Submitted
+    """
     label = models.CharField(blank=True, max_length=50)
     slug = models.SlugField()
 
@@ -54,7 +62,9 @@ class Category(models.Model):
         return ("blog-category", (), {'slug' : self.slug})
 
 class Links(models.Model):
-    """ A model for links to other sites """
+    """
+    A model for links to other sites
+    """
     label = models.CharField(max_length=100)
     site_link = models.CharField(max_length=300)
     slug = models.SlugField()
@@ -68,7 +78,10 @@ class Links(models.Model):
 
 
 class Story(models.Model):
-    """ If this model name isn't self explanatory, quit life """
+    """
+    Status Choices dictate whether or not an article can be seen by the general
+    public. Only Published and Archived will be displayed.
+    """
 
     STATUS_CHOICES = (
         (1, "Needs Edit"),
@@ -109,8 +122,13 @@ class Story(models.Model):
     objects = ViewableManager()
 
 class Article(models.Model):
-    """ Articles are a bit different from Stories. These are 'extra' content pieces. For instance items that don't belong as news, maybe like a projects page of sorts. 
-        By setting 'buttoned' to true in the admin panel, the buttons on the top nav bar will link to this page, and the text will be the title of this page
+    """ 
+    Articles are a bit different from Stories. These are 'extra' content 
+    pieces. For instance items that don't belong as news, maybe like a 
+    projects page of sorts. 
+
+    By setting 'buttoned' to true in the admin panel, the buttons on the top 
+    nav bar will link to this page, and the text will be the title of this page
     """
 
     STATUS_CHOICES = (
@@ -228,8 +246,10 @@ def post_tweet(sender, instance, created, **kwargs):
         if instance.tweet_this:
             try:
                 if settings.TWITTER_USERNAME and settings.TWITTER_PASSWORD:
-                    url = content_tiny_url("%s/%s" % (settings.ROOT_BLOG_URL, instance.get_absolute_url()))
-                    api = twitter.Api(username = settings.TWITTER_USERNAME, password = settings.TWITTER_PASSWORD)
+                    url = content_tiny_url("%s/%s" % (settings.ROOT_BLOG_URL,
+                        instance.get_absolute_url()))
+                    api = twitter.Api(username = settings.TWITTER_USERNAME, 
+                        password = settings.TWITTER_PASSWORD)
                     api.PostUpdate("New blog post - %s" % url)
             except:
                 pass
@@ -238,7 +258,9 @@ def config_name(sender, instance, created, **kwargs):
     if created:
         temp = Configuration.objects.all()
         if temp.count() > 2:
-            raise Exception("There can only be one configuration entry, thus only one theme. Sorry!")     
+            raise Exception(
+                "There can only be one configuration entry, \
+                thus only one theme. Sorry!")     
 
 comments.post_comment = wrapped_post_comment
 

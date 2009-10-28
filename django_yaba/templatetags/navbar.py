@@ -37,8 +37,11 @@ def sitename():
     return {'sitename': sitename}
 
 def archives():
-    """ Creating Archives navigation for the side bar. We start by grabbing all the content, which needs to be made more effecient. 
-    Then we parse out the year date times, then the month date times. """ 
+    """ 
+    Creating Archives navigation for the side bar. We start by grabbing all 
+    the content, which needs to be made more effecient. Then we parse out 
+    the year date times, then the month date times.
+    """ 
     stories = Story.objects.all()
     galleries = Gallery.objects.all()
     articles = Article.objects.all()
@@ -83,7 +86,10 @@ def sidebar():
     else:
         tweet = False
 
-    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 'categories': categories, 'tweet_it': tweet, 'tweet_user': settings.TWITTER_USERNAME, 'year_range': year_range, 'month_range': month_range}
+    return {'link_list': link_list, 'commit': commit, 'sitename': sitename, 
+        'categories': categories, 'tweet_it': tweet, 
+        'tweet_user': settings.TWITTER_USERNAME, 'year_range': year_range, 
+        'month_range': month_range}
 
 def main_nav():
     articles = Article.objects.all()
