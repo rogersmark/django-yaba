@@ -29,8 +29,9 @@
     src="{{ MEDIA_URL }}images/delicious.gif" alt="Delicious!" /></a>
   </p>
   <!-- stop social media -->
-  <hr />
   <!-- start comments -->
+{% if posts.enable_comments %}
+<hr />
 {% load get_setting %}
 {% get_setting "DJANGO_COMMENTS" "django_comments" %}
   {% if django_comments %}
@@ -44,6 +45,7 @@
     {% load disqus_tags %}
     {% disqus_show_comments %}
   {% endif %}
+{% endif %}
   <!-- end comments -->
 </div>
 {% endblock %}

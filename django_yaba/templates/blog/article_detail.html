@@ -31,7 +31,8 @@
   </p>
   <!-- stop social media -->
   <!-- start comments -->
-  <hr />
+{% if posts.enable_comments %}
+<hr />
 {% load get_setting %}
 {% get_setting "DJANGO_COMMENTS" "django_comments" %}
   {% if django_comments %}
@@ -45,6 +46,7 @@
     {% load disqus_tags %}
     {% disqus_show_comments %}
   {% endif %}
+{% endif %}
   <!-- end comments -->
 {% else %}
 <p> Sorry, nothing seems to exist here. Please try one of the many other links instead</p>

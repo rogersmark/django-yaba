@@ -100,7 +100,6 @@ def story_id(request, story_id):
     """
     Bit of a cheap hack. Currently used to get people back to the story they 
     commented on. Translates an ID to a slug
-    Deprecated (comments replaced by Disqus)
     """
     ROOT_URL = settings.ROOT_BLOG_URL
     ROOT_URL = ROOT_URL.rstrip("/")

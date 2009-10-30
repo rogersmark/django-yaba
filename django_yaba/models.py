@@ -1,6 +1,7 @@
 import datetime, urllib, re, twitter
 from tagging.fields import TagField
 from tagging.models import Tag
+from django.contrib.comments.moderation import CommentModerator, moderator
 from django.conf import settings
 from django.db.models.signals import post_save, pre_save
 from django.db.models import permalink
@@ -97,6 +98,7 @@ class Story(models.Model):
     created = models.DateTimeField(default=datetime.datetime.now)
     modified = models.DateTimeField(default=datetime.datetime.now)
     tweet_this = models.BooleanField()
+    enable_comments = models.BooleanField(default=True)
     tags = TagField()
 
     def set_tags(self, tags):
@@ -146,6 +148,7 @@ class Article(models.Model):
     created = models.DateTimeField(default=datetime.datetime.now)
     modified = models.DateTimeField(default=datetime.datetime.now)
     tweet_this = models.BooleanField()
+    enable_comments = models.BooleanField(default=True)
     tags = TagField()
 
     def set_tags(self, tags):
@@ -176,6 +179,7 @@ class Gallery(models.Model):
     body = models.TextField()
     owner = models.ForeignKey(User)
     category = models.ManyToManyField(Category)
+    enable_comments = models.BooleanField(default=True)
     tags = TagField()
 
     def set_tags(self, tags):
@@ -260,6 +264,13 @@ def config_name(sender, instance, created, **kwargs):
                 "There can only be one configuration entry, \
                 thus only one theme. Sorry!")     
 
+class PostModerator(CommentModerator):
+    email_notification = True
+    enable_field = 'enable_comments'
+
+moderator.register(Story, PostModerator)
+moderator.register(Article, PostModerator)
+moderator.register(Gallery, PostModerator)
 
 post_save.connect(config_name, sender=Configuration)
 post_save.connect(post_tweet, sender=Article)

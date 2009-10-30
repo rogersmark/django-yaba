@@ -42,9 +42,10 @@
            <a href="http://www.stumbleupon.com/submit?url={{ ROOT_URL }}{{ post.get_absolute_url }}amp;title={{ post.title }}"><img src="{{ MEDIA_URL }}images/stumble-upon.jpg" alt="StumbleUpon"></a>
            <a href="http://del.icio.us/post?url={{ ROOT_URL }}{{ post.get_absolute_url }}amp;title={{ post.title }}"><img src="{{ MEDIA_URL }}images/delicious.gif" alt="Delicious!"></a>
          </p>
-         <hr />
          <!-- stop social media -->
          <!-- start comments -->
+         {% if post.enable_comments %}
+         <hr />
          {% load get_setting %}
          {% get_setting "DJANGO_COMMENTS" "django_comments" %}
          {% if django_comments %}
@@ -55,6 +56,7 @@
            {% load disqus_tags %}
              <a href="{{ post.get_absolute_url }}#disqus_thread">View Comments</a>
              {% disqus_num_replies %}
+         {% endif %}
          {% endif %}
          <!-- end comments -->
        </div>
