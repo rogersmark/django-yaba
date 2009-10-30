@@ -3,8 +3,6 @@ from tagging.fields import TagField
 from tagging.models import Tag
 from django.conf import settings
 from django.db.models.signals import post_save, pre_save
-from django.contrib.comments.views import comments
-from django_yaba.comments import wrapped_post_comment
 from django.db.models import permalink
 from django_yaba.fields import ThumbnailImageField
 from django.contrib.auth.models import User
@@ -262,7 +260,6 @@ def config_name(sender, instance, created, **kwargs):
                 "There can only be one configuration entry, \
                 thus only one theme. Sorry!")     
 
-comments.post_comment = wrapped_post_comment
 
 post_save.connect(config_name, sender=Configuration)
 post_save.connect(post_tweet, sender=Article)

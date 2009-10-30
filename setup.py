@@ -13,7 +13,7 @@ setup(
     author_email = "f4nt@f4ntasmic.com",
     url = "http://www.f4ntasmic.com",
     
-    packages = find_packages('src'),
+    packages = find_packages('.'),
     package_dir = {'':'.'},
     data_files = media_files,
     package_data = {
@@ -32,10 +32,7 @@ setup(
         'python-twitter',
         'twitter',
         'simplejson',
-        'Django',
-        'South',
         'feedparser',
-        'django_test_extensions',
         'django-disqus',
         'django-tagging',
     ],

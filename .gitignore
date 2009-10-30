@@ -11,3 +11,4 @@ db/
 blog/fixtures
 django_yaba.egg-info
 dist
+build

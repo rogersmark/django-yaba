@@ -45,9 +45,17 @@
          <hr />
          <!-- stop social media -->
          <!-- start comments -->
-         {% load disqus_tags %}
-           <a href="{{ post.get_absolute_url }}#disqus_thread">View Comments</a>
-           {% disqus_num_replies %}
+         {% load get_setting %}
+         {% get_setting "DJANGO_COMMENTS" "django_comments" %}
+         {% if django_comments %}
+           {% load comments %}
+           {% get_comment_count for post as post_count %}
+           <a href="{{ post.get_absolute_url }}">{{ post_count }} Comments</a>
+         {% else %}
+           {% load disqus_tags %}
+             <a href="{{ post.get_absolute_url }}#disqus_thread">View Comments</a>
+             {% disqus_num_replies %}
+         {% endif %}
          <!-- end comments -->
        </div>
        <hr />

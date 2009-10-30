@@ -32,8 +32,19 @@
   <!-- stop social media -->
   <!-- start comments -->
   <hr />
-{% load disqus_tags %}
-{% disqus_show_comments %}
+{% load get_setting %}
+{% get_setting "DJANGO_COMMENTS" "django_comments" %}
+  {% if django_comments %}
+    {% load comments %}
+    {% get_comment_list for posts as post_comments %}
+    {% for comment in post_comments %}
+      {{ comment }}
+    {% endfor %}
+    {% render_comment_form for posts %} 
+  {% else %}
+    {% load disqus_tags %}
+    {% disqus_show_comments %}
+  {% endif %}
   <!-- end comments -->
 {% else %}
 <p> Sorry, nothing seems to exist here. Please try one of the many other links instead</p>

@@ -11,7 +11,13 @@
 <link href="media/css/patch_layout.css" rel="stylesheet" type="text/css" />
 <![endif]-->
 <script type="text/javascript"    src="{{ MEDIA_URL }}js/slide.js"></script>
-            {% load disqus_tags %}
+{% load get_setting %}
+{% get_setting "DJANGO_COMMENTS" "django_comments" %}
+  {% if django_comments %}
+    {% load comments %}
+  {% else %}
+    {% load disqus_tags %}
+  {% endif %}
 
 </head>
 <body>
