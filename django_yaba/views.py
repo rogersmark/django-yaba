@@ -106,14 +106,14 @@ def story_id(request, story_id):
     try:
         posts = get_object_or_404(Story, pk=story_id)
         title = posts.slug
-        return HttpResponseRedirect("/%s/" % title)
+        return HttpResponseRedirect(posts.get_absolute_url())
     except ObjectDoesNotExist:
         pass
 
     try:
         posts = get_object_or_404(Article, pk=story_id)
         title = posts.slug
-        return HttpResponseRedirect("/%s/" % title)
+        return HttpResponseRedirect(posts.get_absolute_url())
     except ObjectDoesNotExist:
         return HttpResponseRedirect("/")
 
