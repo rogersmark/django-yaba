@@ -1,5 +1,10 @@
 from django.db.models.fields.files import ImageField, ImageFieldFile
-from PIL import Image
+
+try:
+    from PIL import Image
+except ImportError:
+    import Image
+
 import os
 
 def _add_thumb(s):
